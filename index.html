@@ -72,6 +72,9 @@
                                 <a href="#blogs" class="nav-link">Blogs</a>
                             </li>
                             <li class="nav-item">
+                                <a href="#presentations" class="nav-link">Presentations</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#publication" class="nav-link">Publications & Patents</a>
                             </li>
                             <li class="nav-item">
@@ -103,7 +106,8 @@
                                         <li class="list-inline-item"><a href="https://twitter.com/ramkrishna2910"><i class="mdi mdi-twitter"></i></a></li>
                                     </ul>
                                     <div class="header_btn">
-                                        <a href="#" class="btn btn-outline-custom btn-rounded mt-4">Download CV</a>
+                                        <!-- <a href="https://github.com/ramkrishna2910/portfolio/blob/main/docs/Ramakrishnan's%20Resume%20March%202023.pdf" class="btn btn-outline-custom btn-rounded mt-4">Download CV</a> -->
+                                        <button onclick="downloadPDF()" class="btn btn-outline-custom btn-rounded mt-4">Download CV</button>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +124,7 @@
         <!--END HOME-->
 
         <!-- START ABOUT -->
-        <section class="section bg-light" id="about">
+        <section class="section bg-white" id="about">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
@@ -152,7 +156,7 @@
         <!-- END ABOUT -->
 
         <!-- START EXP. & EDU. -->
-        <section class="section" id="education">
+        <section class="section bg-light" id="education">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
@@ -242,7 +246,7 @@
         <!-- END EXP. & EDU. -->
 
         <!-- START Blogs -->
-        <section class="section bg-light" id="blogs">
+        <section class="section bg-white" id="blogs">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
@@ -383,6 +387,82 @@
             </div>
         </section>
         <!-- END Blogs -->
+
+        <!-- START Presentation -->
+        <section class="section bg-white" id="presentations">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="text-center mx-auto section-main-title">
+                            <h2><span class="font-weight-bold">Presentations</span></h2>
+                            <div class="main-title-border">
+                                <i class="mdi mdi-asterisk"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 pt-4 justify-content-center mx-auto">
+                    <div class="col-lg-4 mt-3">
+                        <div class="text-center rounded bg-white p-2">
+                            <div class="img_blog">                                
+                                <img src="images/img-2.jpg" alt="" class="img-fluid rounded mx-auto d-block">
+                                <a href="https://ieeexplore.ieee.org/abstract/document/10024028"></a>
+                            </div>
+                            <div class="content_blog pt-3 pb-3">
+                                <div>
+                                    <h5 class="font-weight-bold mb-0"><a href="https://ieeexplore.ieee.org/abstract/document/10024028" class="text-dark">The ONNX Ecosystem</a></h5>
+                                </div>
+                                <div class="mt-3">
+                                    <p class="font-weight-bold h6 mb-3"><a href="https://ieeexplore.ieee.org/abstract/document/10024028" class="text-custom">ML Frameworks</a></p>
+                                    <p class="h6 text-muted date_blog mb-0">22 December 2022</p>
+                                    <!-- <p class="mt-3 desc_blog pl-2 pr-2 text-muted">Sit sagittis vulputate laoreet sodales tortor nulla lobortis bibendum netus primis fames. Lobortis ultricies.</p> -->
+                                    <p class="h6 mb-0"><a href="https://ieeexplore.ieee.org/abstract/document/10024028" class="text-muted font-weight-bold">Watch...</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mt-3">
+                        <div class="text-center rounded bg-white p-2">
+                            <div class="img_blog">                                
+                                <img src="images/patent.png" alt="" class="img-fluid rounded mx-auto d-block">
+                                <a href="https://uspto.report/patent/grant/10,915,356"></a>
+                            </div>
+                            <div class="content_blog pt-3 pb-3">
+                                <div>
+                                    <h5 class="font-weight-bold mb-0"><a href="https://uspto.report/patent/grant/10,915,356" class="text-dark">The world of Ads and its evolving landscape</a></h5>
+                                </div>
+                                <div class="mt-3">
+                                    <p class="font-weight-bold h6 mb-3"><a href="https://uspto.report/patent/grant/10,915,356" class="text-custom">Industry</a></p>
+                                    <p class="h6 text-muted date_blog mb-0">9 February 2021</p>
+                                    <!-- <p class="mt-3 desc_blog pl-2 pr-2 text-muted">Sit sagittis vulputate laoreet sodales tortor nulla lobortis bibendum netus primis fames. Lobortis ultricies.</p> -->
+                                    <p class="h6 mb-0"><a href="https://uspto.report/patent/grant/10,915,356" class="text-muted font-weight-bold">Watch...</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row mt-4 pt-4 justify-content-center">
+                    <div class="col-lg-4 mt-3">
+                        <div class="text-center rounded bg-white p-2">
+                            <div class="img_blog">                                
+                                <img src="images/img-2.jpg" alt="" class="img-fluid rounded mx-auto d-block">
+                                <a href="https://www.emc2-ai.org/assets/docs/virtual-20/emc2-virtual20-paper-11.pdf"></a>
+                            </div>
+                            <div class="content_blog pt-3 pb-3">
+                                <div>
+                                    <h5 class="font-weight-bold mb-0"><a href="https://www.emc2-ai.org/assets/docs/virtual-20/emc2-virtual20-paper-11.pdf" class="text-dark">Graph Neural Networks</a></h5>
+                                </div>
+                                <div class="mt-3">
+                                    <p class="font-weight-bold h6 mb-3"><a href="https://www.emc2-ai.org/assets/docs/virtual-20/emc2-virtual20-paper-11.pdf" class="text-custom">ML Applications</a></p>
+                                    <p class="h6 text-muted date_blog mb-0">15 February 2020</p>
+                                    <p class="h6 mb-0"><a href="https://www.emc2-ai.org/assets/docs/virtual-20/emc2-virtual20-paper-11.pdf" class="text-muted font-weight-bold">Watch...</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+        <!-- END Presentation -->
 
         <!-- START Publication -->
         <section class="section bg-white" id="publication">
