@@ -1,0 +1,15 @@
+{
+  "company": "AMD",
+  "companyUrl": "https://www.amd.com",
+  "title": "Principal Engineer",
+  "location": "Seattle, WA",
+  "start": "2025-05",
+  "end": null,
+  "order": 1,
+  "highlights": [
+    "Technical lead for on-device AI developer experience: making large language models run efficiently on AMD consumer hardware (Ryzen AI NPUs and Radeon GPUs).",
+    "Maintainer of Lemonade, the open-source SDK for local LLM inference across ONNX Runtime, llama.cpp, and NPU-accelerated backends.",
+    "Drive open-source strategy and developer tooling that connects AMD silicon to the local-AI ecosystem."
+  ],
+  "tech": ["Lemonade SDK", "ONNX Runtime", "llama.cpp", "Ryzen AI NPU", "ROCm", "Python", "C++"]
+}

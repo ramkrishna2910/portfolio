@@ -1,0 +1,13 @@
+{
+  "type": "github",
+  "url": "https://github.com/lemonade-sdk/lemonade",
+  "title": "Lemonade SDK",
+  "date": "2025-05-01",
+  "note": "Maintainer",
+  "repo": {
+    "name": "lemonade-sdk/lemonade",
+    "description": "Local AI server: LLMs, speech-to-text, TTS, and image generation with NPU/GPU acceleration — OpenAI-, Anthropic-, and Ollama-compatible APIs.",
+    "language": "Python",
+    "stars": "5.3k"
+  }
+}

@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EntryCard from "../components/EntryCard.astro";
+import { loadAll } from "../lib/content";
+
+const c = await loadAll();
+const bodies = new Map(c.writing.map((w) => [w.id, w.body?.trim() ?? ""]));
+
+const jsonLdExtra = c.writing.map((w) => ({
+  "@type": "BlogPosting",
+  headline: w.data.title,
+  url: w.data.url,
+  datePublished: w.data.date.toISOString().slice(0, 10),
+  author: { "@id": `${Astro.site?.href}#person` },
+  publisher: w.data.venue,
+}));
+---
+
+<BaseLayout
+  title="Writing"
+  description="Articles by Ramakrishnan Sivakumar on ONNX, ML compilers, local LLM inference, open source, and AI accelerators."
+  jsonLdExtra={jsonLdExtra}
+>
+  <div class="shell-wide">
+    <header class="page-head">
+      <h1>Writing</h1>
+      <p class="lede prose">
+        Articles on ML systems — ONNX, compilers, local inference — and occasionally products,
+        ecosystems, and whatever else earns an essay.
+      </p>
+    </header>
+    <div class="ledger">
+      {
+        c.writing.map((w) => (
+          <EntryCard
+            meta={w.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" })}
+            title={w.data.title}
+            href={w.data.url}
+            sub={w.data.venue}
+          >
+            {bodies.get(w.id)}
+          </EntryCard>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: var(--s16) var(--s12);
+  }
+  h1 {
+    font-size: var(--text-2xl);
+    font-variation-settings: "wdth" 118;
+    text-transform: uppercase;
+  }
+  .lede {
+    margin-top: var(--s3);
+    color: var(--muted);
+  }
+  .ledger {
+    padding-bottom: var(--s16);
+  }
+</style>

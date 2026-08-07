@@ -1,0 +1,48 @@
+---
+interface Props {
+  meta: string;
+  title: string;
+  href: string;
+  external?: boolean;
+  sub?: string;
+}
+const { meta, title, href, external = true, sub } = Astro.props;
+---
+
+<article class="ledger-row">
+  <p class="meta">{meta}</p>
+  <div>
+    <h3>
+      <a href={href} {...(external ? { rel: "noopener" } : {})}>{title}</a>
+    </h3>
+    {sub && <p class="sub">{sub}</p>}
+    <div class="body"><slot /></div>
+  </div>
+</article>
+
+<style>
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    max-width: var(--measure);
+  }
+  h3 a {
+    text-decoration-color: transparent;
+  }
+  h3 a:hover {
+    text-decoration-color: var(--accent);
+  }
+  .sub {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--muted);
+    margin-top: var(--s1);
+  }
+  .body {
+    margin-top: var(--s2);
+    color: var(--muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    max-width: var(--measure);
+  }
+</style>

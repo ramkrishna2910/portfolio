@@ -1,0 +1,9 @@
+{
+  "title": "Platform-Aware Resource Allocation for Inference on Multi-Accelerator Edge Devices",
+  "authors": ["Ramakrishnan Sivakumar", "et al."],
+  "venue": "EMC² Workshop (Energy Efficient Machine Learning and Cognitive Computing)",
+  "year": 2020,
+  "url": "https://www.emc2-ai.org/assets/docs/virtual-20/emc2-virtual20-paper-11.pdf",
+  "type": "workshop",
+  "summary": "How to schedule inference workloads across the heterogeneous accelerators (CPU, GPU, VPU) on a single edge device: a platform-aware allocation approach that improves throughput and energy efficiency over naive placement."
+}

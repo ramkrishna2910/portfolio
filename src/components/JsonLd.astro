@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+
+interface Props {
+  extra?: object[];
+}
+
+const { extra = [] } = Astro.props;
+
+const [profileEntry] = await getCollection("profile");
+const [educationEntry] = await getCollection("education");
+const p = profileEntry.data;
+const site = Astro.site?.href ?? "";
+
+const person = {
+  "@type": "Person",
+  "@id": `${site}#person`,
+  name: p.name,
+  jobTitle: "Principal Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "AMD",
+    url: "https://www.amd.com",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: educationEntry.data.institution,
+    url: educationEntry.data.institutionUrl,
+  },
+  description: p.shortBio,
+  email: `mailto:${p.email}`,
+  url: site,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Seattle",
+    addressRegion: "WA",
+    addressCountry: "US",
+  },
+  knowsAbout: p.knowsAbout,
+  sameAs: [
+    ...p.socials.map((s) => s.url),
+    "https://github.com/lemonade-sdk/lemonade",
+  ],
+};
+
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    person,
+    {
+      "@type": "WebSite",
+      "@id": `${site}#website`,
+      url: site,
+      name: p.name,
+      description: p.shortBio,
+      author: { "@id": `${site}#person` },
+    },
+    ...extra,
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

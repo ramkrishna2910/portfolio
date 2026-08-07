@@ -1,0 +1,15 @@
+{
+  "company": "Groq",
+  "companyUrl": "https://groq.com",
+  "title": "Senior Machine Learning Software Engineer",
+  "location": "Seattle, WA",
+  "start": "2021-01",
+  "end": "2023-01",
+  "order": 3,
+  "highlights": [
+    "Co-created GroqFlow, the automated tool flow that compiles PyTorch, TensorFlow, and ONNX models to the Groq LPU with a single function call.",
+    "Customer applications engineering for the Groq deterministic AI accelerator: ported and optimized customer models including graph neural networks.",
+    "Presented Groq's ONNX ecosystem work and GNN acceleration results at public developer events (GroqDay)."
+  ],
+  "tech": ["GroqFlow", "Groq LPU", "ONNX", "PyTorch", "Python"]
+}

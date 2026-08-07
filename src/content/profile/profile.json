@@ -1,0 +1,118 @@
+[
+  {
+    "id": "profile",
+    "name": "Ramakrishnan Sivakumar",
+    "headline": "Principal Engineer at AMD \u2014 on-device AI",
+    "shortBio": "Principal Engineer at AMD working on on-device AI: running large language models efficiently on consumer hardware. Maintainer of Lemonade, an open-source SDK for local LLM inference.",
+    "longBio": [
+      "I'm a machine learning systems engineer with over a decade of experience making AI faster on the hardware it runs on. My current focus is on-device AI \u2014 getting large language models to run efficiently on consumer hardware such as laptops and workstations with NPUs and integrated GPUs.",
+      "I maintain Lemonade (5k+ GitHub stars, sponsored by AMD), an open-source local AI server that runs LLMs, speech-to-text, text-to-speech, and image generation fully locally with NPU and GPU acceleration, exposing OpenAI-, Anthropic-, and Ollama-compatible APIs. I previously co-created TurnkeyML (now in the ONNX organization) and GroqFlow. Across roles at Intel, Groq, and now AMD, I've shipped ML compilers, AI accelerator software, and developer tools spanning ONNX, ONNX Runtime, llama.cpp, and ROCm \u2014 and contributed over 2,000 models to the ONNX Model Zoo.",
+      "I hold two granted US patents on thread scheduling and power management, publish research on AI accelerator evaluation, and am active in the ONNX community \u2014 presenting the relaunched ONNX Model Zoo and moderating the 2025 ONNX Community Meetup panel on interoperability and standardization in AI."
+    ],
+    "location": "Seattle, Washington, USA",
+    "email": "ramkrishna2910@gmail.com",
+    "socials": [
+      {
+        "platform": "linkedin",
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/ramakrishnansivakumar/",
+        "handle": "ramakrishnansivakumar"
+      },
+      {
+        "platform": "github",
+        "label": "GitHub",
+        "url": "https://github.com/ramkrishna2910",
+        "handle": "ramkrishna2910"
+      },
+      {
+        "platform": "medium",
+        "label": "Medium",
+        "url": "https://medium.com/@ramkrishna2910",
+        "handle": "@ramkrishna2910"
+      },
+      {
+        "platform": "scholar",
+        "label": "Google Scholar",
+        "url": "https://scholar.google.com/citations?user=15TuaaoAAAAJ",
+        "handle": "Ramakrishnan Sivakumar"
+      },
+      {
+        "platform": "x",
+        "label": "X",
+        "url": "https://twitter.com/ramkrishna2910",
+        "handle": "@ramkrishna2910"
+      },
+      {
+        "platform": "huggingface",
+        "label": "Hugging Face",
+        "url": "https://huggingface.co/ramkrishna2910",
+        "handle": "ramkrishna2910"
+      }
+    ],
+    "knowsAbout": [
+      "On-device AI",
+      "Local LLM inference",
+      "Large language models",
+      "Machine learning systems",
+      "ML compilers",
+      "AI accelerators",
+      "AI accelerator benchmarking",
+      "Model quantization",
+      "Neural processing units (NPU)",
+      "AMD Ryzen AI",
+      "ONNX",
+      "ONNX Runtime",
+      "ONNX Script",
+      "ONNX Model Zoo",
+      "llama.cpp",
+      "ROCm",
+      "Lemonade SDK",
+      "TurnkeyML",
+      "GroqFlow",
+      "Model Context Protocol (MCP)",
+      "OpenAI-compatible APIs",
+      "Graph neural networks",
+      "Deep learning performance optimization",
+      "Edge AI inference",
+      "Developer tools for machine learning",
+      "Open-source software"
+    ],
+    "skillGroups": [
+      {
+        "label": "On-device & local inference",
+        "items": [
+          "Local LLM serving (Lemonade SDK)",
+          "llama.cpp",
+          "ONNX Runtime (CPU, GPU, NPU execution providers)",
+          "AMD Ryzen AI NPU",
+          "Quantization for consumer hardware"
+        ]
+      },
+      {
+        "label": "ML compilers & runtimes",
+        "items": [
+          "ONNX / ONNX Script / ONNX Model Zoo",
+          "ML compiler toolchains (GroqFlow, TurnkeyML)",
+          "ROCm",
+          "Deep learning graph optimization"
+        ]
+      },
+      {
+        "label": "AI accelerators",
+        "items": [
+          "Accelerator software stacks (AMD, Groq LPU, Intel)",
+          "Benchmarking novel AI accelerators (Groq, Cerebras, SambaNova, Graphcore)",
+          "Platform-aware inference resource allocation"
+        ]
+      },
+      {
+        "label": "Engineering leadership",
+        "items": [
+          "Open-source project maintainership",
+          "Developer experience & product ecosystems",
+          "Technical talks and community building"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "title": "Exploring the Use of Dataflow Architectures for Graph Neural Network Workloads",
+  "authors": ["Ryien Hosseini", "et al. (incl. Ramakrishnan Sivakumar)"],
+  "venue": "ISC High Performance 2023 Workshops (LNCS 13999)",
+  "year": 2023,
+  "url": "https://link.springer.com/chapter/10.1007/978-3-031-40843-4_48",
+  "type": "workshop",
+  "summary": "GNNs bottleneck on non-contiguous memory access patterns that GPUs handle poorly; this work evaluates how dataflow architectures from emerging AI accelerators alleviate those memory and compute bottlenecks for graph neural network workloads."
+}

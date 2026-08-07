@@ -1,0 +1,9 @@
+{
+  "title": "Hardware and software coordinated cost-aware low power state selection",
+  "number": "US 12,141,015",
+  "status": "granted",
+  "url": "https://patents.google.com/patent/US12141015B2",
+  "year": 2024,
+  "assignee": "Intel Corporation",
+  "summary": "Coordinates hardware and software views of entry/exit cost when selecting processor low-power states, avoiding energy-negative sleep transitions. Granted November 12, 2024."
+}

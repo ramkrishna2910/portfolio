@@ -1,0 +1,103 @@
+---
+import YouTubeLite from "./YouTubeLite.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  entry: CollectionEntry<"highlights">;
+}
+const { entry } = Astro.props;
+const h = entry.data;
+const dateLabel = h.date.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" });
+const platformLabel = { youtube: "YouTube", x: "X", linkedin: "LinkedIn", github: "GitHub" }[h.type];
+---
+
+<article class={`highlight highlight-${h.type}`}>
+  <p class="meta">
+    {platformLabel} · {dateLabel}{h.note && ` · ${h.note}`}
+  </p>
+
+  {h.type === "youtube" && h.youtubeId && (
+    <>
+      <YouTubeLite id={h.youtubeId} title={h.title} />
+      <h3><a href={h.url} rel="noopener">{h.title}</a></h3>
+    </>
+  )}
+
+  {h.type === "github" && h.repo && (
+    <a class="repo-card" href={h.url} rel="noopener">
+      <h3>{h.repo.name}</h3>
+      <p>{h.repo.description}</p>
+      <p class="repo-meta">
+        <span>{h.repo.language}</span>
+        {h.repo.stars && <span>★ {h.repo.stars}</span>}
+      </p>
+    </a>
+  )}
+
+  {(h.type === "x" || h.type === "linkedin") && (
+    <a class="quote-card" href={h.url} rel="noopener">
+      <blockquote>{h.excerpt}</blockquote>
+      <p class="attribution">{h.title} →</p>
+    </a>
+  )}
+</article>
+
+<style>
+  .highlight {
+    display: grid;
+    gap: var(--s3);
+    align-content: start;
+  }
+  h3 {
+    font-size: var(--text-base);
+    font-weight: 600;
+  }
+  h3 a {
+    text-decoration-color: transparent;
+  }
+  h3 a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  .repo-card,
+  .quote-card {
+    display: block;
+    border: 1px solid var(--rule);
+    padding: var(--s6);
+    text-decoration: none;
+    background: var(--bg);
+    transition: border-color 120ms ease;
+    height: 100%;
+  }
+  .repo-card:hover,
+  .quote-card:hover {
+    border-color: var(--accent);
+  }
+  .repo-card h3 {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--accent-ink);
+  }
+  .repo-card p {
+    margin-top: var(--s2);
+    font-size: var(--text-sm);
+    color: var(--muted);
+    line-height: var(--leading-normal);
+  }
+  .repo-meta {
+    display: flex;
+    gap: var(--s4);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+  }
+  .quote-card blockquote {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+  }
+  .attribution {
+    margin-top: var(--s3);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--accent-ink);
+  }
+</style>

@@ -1,0 +1,9 @@
+{
+  "title": "Technology to augment thread scheduling with temporal characteristics",
+  "number": "US 10,915,356",
+  "status": "granted",
+  "url": "https://patents.google.com/patent/US10915356B2",
+  "year": 2021,
+  "assignee": "Intel Corporation",
+  "summary": "Augments OS thread scheduling decisions with temporal characteristics of workloads, improving placement of threads on heterogeneous cores."
+}

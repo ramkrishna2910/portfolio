@@ -1,0 +1,13 @@
+[
+  { "id": "cricket", "label": "Cricket" },
+  { "id": "climbing", "label": "Climbing" },
+  { "id": "biking", "label": "Biking" },
+  { "id": "badminton", "label": "Badminton" },
+  { "id": "running", "label": "Running" },
+  {
+    "id": "cooking",
+    "label": "Cooking",
+    "url": "https://github.com/ramkrishna2910/Memories-on-a-plate",
+    "note": "recipes on GitHub"
+  }
+]

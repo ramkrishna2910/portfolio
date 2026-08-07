@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import YouTubeLite from "../components/YouTubeLite.astro";
+import { loadAll } from "../lib/content";
+
+const c = await loadAll();
+const bodies = new Map(c.talks.map((t) => [t.id, t.body?.trim() ?? ""]));
+
+const jsonLdExtra = c.talks
+  .filter((t) => t.data.youtubeId)
+  .map((t) => ({
+    "@type": "VideoObject",
+    name: t.data.title,
+    description: bodies.get(t.id) || t.data.event,
+    uploadDate: t.data.date.toISOString().slice(0, 10),
+    thumbnailUrl: `https://i.ytimg.com/vi/${t.data.youtubeId}/hqdefault.jpg`,
+    embedUrl: `https://www.youtube-nocookie.com/embed/${t.data.youtubeId}`,
+    url: `https://www.youtube.com/watch?v=${t.data.youtubeId}`,
+  }));
+---
+
+<BaseLayout
+  title="Talks"
+  description="Recorded talks, demos, and panels by Ramakrishnan Sivakumar — the ONNX ecosystem, local LLM inference with Lemonade, graph neural networks on AI accelerators."
+  jsonLdExtra={jsonLdExtra}
+>
+  <div class="shell-wide">
+    <header class="page-head">
+      <h1>Talks</h1>
+      <p class="lede prose">
+        Conference talks, community meetups, and booth demos — mostly about the ONNX ecosystem
+        and running AI locally.
+      </p>
+    </header>
+    <div class="talk-grid">
+      {
+        c.talks.map((t) => (
+          <article class="talk">
+            <p class="meta">
+              {t.data.event} ·{" "}
+              {t.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" })}
+              {t.data.role !== "Speaker" && ` · ${t.data.role}`}
+            </p>
+            {t.data.youtubeId ? (
+              <YouTubeLite id={t.data.youtubeId} title={t.data.title} />
+            ) : null}
+            <h2>
+              {t.data.youtubeId ? (
+                <a href={`https://www.youtube.com/watch?v=${t.data.youtubeId}`} rel="noopener">
+                  {t.data.title}
+                </a>
+              ) : t.data.url ? (
+                <a href={t.data.url} rel="noopener">
+                  {t.data.title}
+                </a>
+              ) : (
+                t.data.title
+              )}
+            </h2>
+            <p class="desc">{bodies.get(t.id)}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: var(--s16) var(--s12);
+  }
+  h1 {
+    font-size: var(--text-2xl);
+    font-variation-settings: "wdth" 118;
+    text-transform: uppercase;
+  }
+  .lede {
+    margin-top: var(--s3);
+    color: var(--muted);
+  }
+  .talk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: var(--s12) var(--s8);
+    padding-bottom: var(--s16);
+  }
+  .talk {
+    display: grid;
+    gap: var(--s3);
+    align-content: start;
+  }
+  .talk h2 {
+    font-size: var(--text-base);
+    font-weight: 600;
+  }
+  .talk h2 a {
+    text-decoration-color: transparent;
+  }
+  .talk h2 a:hover {
+    text-decoration-color: var(--accent);
+  }
+  .desc {
+    color: var(--muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+  }
+</style>

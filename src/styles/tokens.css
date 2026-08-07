@@ -1,0 +1,47 @@
+/* Design tokens — engineering-journal aesthetic.
+   Cool paper, blue-black ink, solder-mask green accent. */
+:root {
+  /* color */
+  --bg: #fdfdfb;
+  --ink: #1a1c1e;
+  --muted: #5c6167;
+  --faint: #8b9096;
+  --rule: #e4e5e1;
+  --accent: #0f5a44;
+  --accent-ink: #0c4a38;
+  --wash: #f4f6f2;
+
+  /* type */
+  --font-display: "Archivo Variable", "Archivo", system-ui, sans-serif;
+  --font-body: "Source Serif 4 Variable", "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: clamp(2.5rem, 7vw, 4.25rem);
+
+  --leading-tight: 1.15;
+  --leading-normal: 1.45;
+  --leading-relaxed: 1.65;
+
+  /* space (4px base) */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s6: 1.5rem;
+  --s8: 2rem;
+  --s12: 3rem;
+  --s16: 4rem;
+  --s24: 6rem;
+
+  /* layout */
+  --measure: 65ch;
+  --col-prose: 46rem;
+  --col-wide: 58rem;
+  --meta-col: 11rem;
+}

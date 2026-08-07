@@ -1,0 +1,14 @@
+{
+  "company": "Intel",
+  "companyUrl": "https://www.intel.com",
+  "title": "Operating System Software Engineer",
+  "location": "Hillsboro, OR",
+  "start": "2016-06",
+  "end": "2018-01",
+  "order": 5,
+  "highlights": [
+    "Worked on operating system software for Intel client platforms: scheduling, power states, and platform performance characterization.",
+    "Foundation for later granted patent US 10,915,356 on augmenting thread scheduling with temporal characteristics."
+  ],
+  "tech": ["Operating systems", "Thread scheduling", "Power management", "C"]
+}

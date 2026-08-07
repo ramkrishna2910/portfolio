@@ -1,0 +1,15 @@
+{
+  "company": "Intel",
+  "companyUrl": "https://www.intel.com",
+  "title": "Deep Learning Software Engineer",
+  "location": "Hillsboro, OR",
+  "start": "2018-01",
+  "end": "2021-01",
+  "order": 4,
+  "highlights": [
+    "Optimized transformer inference on Intel CPUs: co-authored the Microsoft Open Source blog work on accelerating BERT with the ONNX Runtime default execution provider.",
+    "Researched platform-aware resource allocation for inference on multi-accelerator edge devices (published at the EMC² workshop).",
+    "Filed multiple US patents on thread scheduling, power management, and data-flow prioritization arising from client-platform performance work."
+  ],
+  "tech": ["ONNX Runtime", "BERT", "Intel CPU optimization", "Edge inference", "C++", "Python"]
+}

@@ -1,0 +1,245 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { loadAll, fmtRange } from "../lib/content";
+
+const c = await loadAll();
+const p = c.profile;
+const featured = c.projects.filter((pr) => pr.data.featured);
+const projectBodies = new Map<string, string>();
+for (const pr of c.projects) {
+  projectBodies.set(pr.id, pr.body?.trim() ?? "");
+}
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="hero shell-wide">
+    <p class="eyebrow">Seattle, WA · On-device AI</p>
+    <h1>Ramakrishnan<br />Sivakumar</h1>
+    <p class="headline prose">
+      Principal Engineer at <a href="https://www.amd.com" rel="noopener">AMD</a>, making large
+      language models run fast on the hardware people already own. Maintainer of
+      <a href="https://github.com/lemonade-sdk/lemonade" rel="noopener">Lemonade</a>, the
+      open-source local AI server.
+    </p>
+    <p class="hero-machines" aria-label="Machine-readable versions of this site">
+      <span class="meta">for agents&nbsp;→</span>
+      <a rel="alternate" type="text/markdown" href="/resume.md">/resume.md</a>
+      <a href="/llms.txt">/llms.txt</a>
+    </p>
+  </section>
+
+  <!-- About -->
+  <section class="section" aria-labelledby="about-h">
+    <div class="shell-wide">
+      <div class="section-head"><h2 id="about-h" class="eyebrow">About</h2></div>
+      <div class="prose about-prose">
+        {p.longBio.map((para) => <p>{para}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section" aria-labelledby="exp-h">
+    <div class="shell-wide">
+      <div class="section-head"><h2 id="exp-h" class="eyebrow">Experience</h2></div>
+      <div class="ledger">
+        {
+          c.experience.map((e) => (
+            <article class="ledger-row">
+              <p class="meta">{fmtRange(e.data.start, e.data.end)}</p>
+              <div>
+                <h3>
+                  {e.data.title} ·{" "}
+                  <a href={e.data.companyUrl} rel="noopener">
+                    {e.data.company}
+                  </a>
+                </h3>
+                <ul class="role-highlights">
+                  {e.data.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))
+        }
+        <article class="ledger-row">
+          <p class="meta">
+            {c.education.start.slice(0, 4)} — {c.education.end.slice(0, 4)}
+          </p>
+          <div>
+            <h3>
+              {c.education.degree}, {c.education.field} ·{" "}
+              <a href={c.education.institutionUrl} rel="noopener">{c.education.institution}</a>
+            </h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected work -->
+  <section class="section" aria-labelledby="work-h">
+    <div class="shell-wide">
+      <div class="section-head"><h2 id="work-h" class="eyebrow">Selected work</h2></div>
+      <div class="ledger">
+        {
+          featured.map((pr) => (
+            <article class="ledger-row">
+              <p class="meta">{pr.data.role}</p>
+              <div>
+                <h3>
+                  <a href={pr.data.url} rel="noopener">
+                    {pr.data.name}
+                  </a>
+                  <span class="tagline"> — {pr.data.tagline}</span>
+                </h3>
+                <p class="project-body">{projectBodies.get(pr.id)}</p>
+                <p class="tech meta">{pr.data.tech.join(" · ")}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section" aria-labelledby="skills-h">
+    <div class="shell-wide">
+      <div class="section-head"><h2 id="skills-h" class="eyebrow">Skills</h2></div>
+      <div class="skills-grid">
+        {
+          p.skillGroups.map((g) => (
+            <div>
+              <h3>{g.label}</h3>
+              <ul>
+                {g.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Interests -->
+  <section class="section" aria-labelledby="interests-h">
+    <div class="shell-wide">
+      <div class="section-head"><h2 id="interests-h" class="eyebrow">Off hours</h2></div>
+      <p class="interests">
+        {
+          c.interests.map((i, idx) => (
+            <>
+              {i.data.url ? (
+                <a href={i.data.url} rel="noopener">
+                  {i.data.label}
+                </a>
+              ) : (
+                <span>{i.data.label}</span>
+              )}
+              {idx < c.interests.length - 1 && <span class="sep" aria-hidden="true"> · </span>}
+            </>
+          ))
+        }
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--s24) var(--s16);
+  }
+  .hero h1 {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    font-variation-settings: "wdth" 122;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin-block: var(--s4) var(--s6);
+  }
+  .headline {
+    font-size: var(--text-lg);
+    line-height: var(--leading-normal);
+    max-width: 34em;
+  }
+  .hero-machines {
+    margin-top: var(--s8);
+    display: flex;
+    align-items: baseline;
+    gap: var(--s4);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+  .hero-machines a {
+    color: var(--accent-ink);
+    text-decoration-color: transparent;
+  }
+  .hero-machines a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  .about-prose p + p {
+    margin-top: var(--s4);
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+  .role-highlights {
+    margin-top: var(--s2);
+    padding-left: 1.1em;
+    color: var(--muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    max-width: var(--measure);
+    display: grid;
+    gap: var(--s1);
+  }
+  .tagline {
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .project-body {
+    margin-top: var(--s2);
+    color: var(--muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    max-width: var(--measure);
+  }
+  .tech {
+    margin-top: var(--s2);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--s8);
+  }
+  .skills-grid h3 {
+    font-size: var(--text-base);
+    margin-bottom: var(--s2);
+  }
+  .skills-grid ul {
+    padding-left: 1.1em;
+    color: var(--muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    display: grid;
+    gap: var(--s1);
+  }
+
+  .interests {
+    font-size: var(--text-base);
+  }
+  .sep {
+    color: var(--faint);
+  }
+</style>

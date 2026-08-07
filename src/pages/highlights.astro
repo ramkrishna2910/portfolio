@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HighlightCard from "../components/HighlightCard.astro";
+import { loadAll } from "../lib/content";
+
+const c = await loadAll();
+---
+
+<BaseLayout
+  title="Highlights"
+  description="Curated highlights from Ramakrishnan Sivakumar across platforms — talks, open-source releases, demos, and posts in one place."
+>
+  <div class="shell-wide">
+    <header class="page-head">
+      <h1>Highlights</h1>
+      <p class="lede prose">
+        The best moments from every platform, in one place — releases, demos, talks, and posts.
+      </p>
+    </header>
+    <div class="highlight-grid">
+      {c.highlights.map((h) => <HighlightCard entry={h} />)}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: var(--s16) var(--s12);
+  }
+  h1 {
+    font-size: var(--text-2xl);
+    font-variation-settings: "wdth" 118;
+    text-transform: uppercase;
+  }
+  .lede {
+    margin-top: var(--s3);
+    color: var(--muted);
+  }
+  .highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: var(--s12) var(--s8);
+    padding-bottom: var(--s16);
+  }
+</style>

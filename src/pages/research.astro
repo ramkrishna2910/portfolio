@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EntryCard from "../components/EntryCard.astro";
+import { loadAll } from "../lib/content";
+
+const c = await loadAll();
+const granted = c.patents.filter((p) => p.data.status === "granted");
+const pending = c.patents.filter((p) => p.data.status === "application");
+
+const jsonLdExtra = c.publications.map((pub) => ({
+  "@type": "ScholarlyArticle",
+  headline: pub.data.title,
+  name: pub.data.title,
+  url: pub.data.url,
+  datePublished: String(pub.data.year),
+  isPartOf: pub.data.venue,
+  author: { "@id": `${Astro.site?.href}#person` },
+}));
+---
+
+<BaseLayout
+  title="Research"
+  description="Publications and patents by Ramakrishnan Sivakumar — AI accelerator evaluation, dataflow architectures for GNNs, edge inference, thread scheduling, and power management."
+  jsonLdExtra={jsonLdExtra}
+>
+  <div class="shell-wide">
+    <header class="page-head">
+      <h1>Research</h1>
+      <p class="lede prose">
+        Peer-reviewed work on AI accelerators and edge inference, plus granted patents from
+        platform-performance work at Intel.
+        <a href="https://scholar.google.com/citations?user=15TuaaoAAAAJ" rel="noopener"
+          >Google Scholar profile →</a>
+      </p>
+    </header>
+
+    <section class="section" aria-labelledby="pubs-h">
+      <div class="section-head"><h2 id="pubs-h" class="eyebrow">Publications</h2></div>
+      <div class="ledger">
+        {
+          c.publications.map((pub) => (
+            <EntryCard
+              meta={String(pub.data.year)}
+              title={pub.data.title}
+              href={pub.data.url}
+              sub={pub.data.venue}
+            >
+              {pub.data.summary}
+            </EntryCard>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="patents-h">
+      <div class="section-head"><h2 id="patents-h" class="eyebrow">Patents</h2></div>
+      <div class="ledger">
+        {
+          [...granted, ...pending].map((pat) => (
+            <EntryCard
+              meta={`${pat.data.number} · ${pat.data.status}`}
+              title={pat.data.title}
+              href={pat.data.url}
+              sub={`${pat.data.assignee}, ${pat.data.year}`}
+            >
+              {pat.data.summary}
+            </EntryCard>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-block: var(--s16) var(--s4);
+  }
+  h1 {
+    font-size: var(--text-2xl);
+    font-variation-settings: "wdth" 118;
+    text-transform: uppercase;
+  }
+  .lede {
+    margin-top: var(--s3);
+    color: var(--muted);
+  }
+</style>

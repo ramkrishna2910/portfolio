@@ -1,0 +1,12 @@
+{
+  "type": "github",
+  "url": "https://github.com/onnx/turnkeyml",
+  "title": "TurnkeyML joins the ONNX organization",
+  "date": "2023-11-01",
+  "note": "Co-creator",
+  "repo": {
+    "name": "onnx/turnkeyml",
+    "description": "The AI insights toolchain — export, optimize, benchmark, and validate models across runtimes and hardware.",
+    "language": "Python"
+  }
+}

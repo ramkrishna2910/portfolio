@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Not found" description="Page not found.">
+  <div class="shell-wide wrap">
+    <p class="meta">404</p>
+    <h1>No page at this address.</h1>
+    <p>
+      Try the <a href="/">home page</a>, <a href="/writing">writing</a>,
+      <a href="/talks">talks</a>, <a href="/research">research</a>, or
+      <a href="/highlights">highlights</a>.
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap {
+    padding-block: var(--s24);
+    display: grid;
+    gap: var(--s4);
+  }
+  h1 {
+    font-size: var(--text-2xl);
+    font-variation-settings: "wdth" 118;
+  }
+</style>
