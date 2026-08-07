@@ -13,28 +13,43 @@ for (const pr of c.projects) {
 
 <BaseLayout>
   <!-- Hero -->
-  <section class="hero shell-wide">
-    <p class="eyebrow">Seattle, WA · On-device AI</p>
-    <h1>Ramakrishnan<br />Sivakumar</h1>
-    <p class="headline prose">
-      Principal Engineer at <a href="https://www.amd.com" rel="noopener">AMD</a>, making large
-      language models run fast on the hardware people already own. Maintainer of
-      <a href="https://github.com/lemonade-sdk/lemonade" rel="noopener">Lemonade</a>, the
-      open-source local AI server.
-    </p>
-    <p class="hero-machines" aria-label="Machine-readable versions of this site">
-      <span class="meta">for agents&nbsp;→</span>
-      <a rel="alternate" type="text/markdown" href="/resume.md">/resume.md</a>
-      <a href="/llms.txt">/llms.txt</a>
-    </p>
+  <section class="hero band-deep">
+    <div class="shell-wide">
+      <p class="eyebrow">Seattle, WA · On-device AI</p>
+      <h1>Ramakrishnan<br />Sivakumar</h1>
+      <p class="headline">
+        Principal Engineer at <a href="https://www.amd.com" rel="noopener">AMD</a>, making large
+        language models run fast on the hardware people already own. Maintainer of
+        <a href="https://github.com/lemonade-sdk/lemonade" rel="noopener">Lemonade</a>, the
+        open-source local AI server.
+      </p>
+      <p class="hero-machines" aria-label="Machine-readable versions of this site">
+        <span class="meta">for agents&nbsp;→</span>
+        <a rel="alternate" type="text/markdown" href="/resume.md">/resume.md</a>
+        <a href="/llms.txt">/llms.txt</a>
+      </p>
+    </div>
   </section>
 
   <!-- About -->
   <section class="section" aria-labelledby="about-h">
     <div class="shell-wide">
       <div class="section-head"><h2 id="about-h" class="eyebrow">About</h2></div>
-      <div class="prose about-prose">
-        {p.longBio.map((para) => <p>{para}</p>)}
+      <div class="about-grid">
+        <div class="about-prose">
+          {p.longBio.map((para) => <p>{para}</p>)}
+        </div>
+        <aside class="facts" aria-label="At a glance">
+          <p class="meta facts-title">At a glance</p>
+          <dl>
+            <div><dt>Role</dt><dd>Principal Engineer, AMD</dd></div>
+            <div><dt>Focus</dt><dd>On-device AI · local LLMs</dd></div>
+            <div><dt>Open source</dt><dd>Lemonade — 5.3k★</dd></div>
+            <div><dt>Shipping since</dt><dd>2016 · Intel → Groq → AMD</dd></div>
+            <div><dt>Patents</dt><dd>2 granted (US)</dd></div>
+            <div><dt>Community</dt><dd>ONNX Model Zoo · meetup panels</dd></div>
+          </dl>
+        </aside>
       </div>
     </div>
   </section>
@@ -80,7 +95,7 @@ for (const pr of c.projects) {
   </section>
 
   <!-- Selected work -->
-  <section class="section" aria-labelledby="work-h">
+  <section class="section section--wash" aria-labelledby="work-h">
     <div class="shell-wide">
       <div class="section-head"><h2 id="work-h" class="eyebrow">Selected work</h2></div>
       <div class="ledger">
@@ -153,6 +168,7 @@ for (const pr of c.projects) {
 <style>
   .hero {
     padding-block: var(--s24) var(--s16);
+    border-bottom: 4px solid var(--deep-edge);
   }
   .hero h1 {
     font-size: var(--text-3xl);
@@ -161,6 +177,7 @@ for (const pr of c.projects) {
     text-transform: uppercase;
     letter-spacing: 0.01em;
     margin-block: var(--s4) var(--s6);
+    color: #fff;
   }
   .headline {
     font-size: var(--text-lg);
@@ -169,22 +186,77 @@ for (const pr of c.projects) {
   }
   .hero-machines {
     margin-top: var(--s8);
-    display: flex;
+    display: inline-flex;
     align-items: baseline;
     gap: var(--s4);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
+    border: 1px solid var(--grid-on-deep);
+    background: rgba(0, 0, 0, 0.18);
+    padding: var(--s3) var(--s4);
   }
   .hero-machines a {
-    color: var(--accent-ink);
     text-decoration-color: transparent;
   }
   .hero-machines a:hover {
-    text-decoration-color: var(--accent);
+    text-decoration-color: var(--paper-on-deep);
   }
 
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(15rem, 1fr);
+    gap: var(--s8) var(--s16);
+    align-items: start;
+  }
+  .about-prose {
+    columns: 2;
+    column-gap: var(--s12);
+    column-rule: 1px solid var(--rule);
+  }
   .about-prose p + p {
     margin-top: var(--s4);
+  }
+  .facts {
+    border: 1px solid var(--rule);
+    background: var(--wash);
+    padding: var(--s6);
+  }
+  .facts-title {
+    color: var(--accent-ink);
+    margin-bottom: var(--s4);
+  }
+  .facts dl {
+    display: grid;
+    gap: var(--s3);
+  }
+  .facts div {
+    display: grid;
+    gap: 2px;
+    padding-top: var(--s3);
+    border-top: 1px solid var(--rule);
+  }
+  .facts div:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .facts dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .facts dd {
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+  @media (max-width: 56rem) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-prose {
+      columns: 1;
+    }
   }
 
   h3 {

@@ -2,14 +2,22 @@
    Cool paper, blue-black ink, solder-mask green accent. */
 :root {
   /* color */
-  --bg: #fdfdfb;
+  --bg: #faf9f5;
   --ink: #1a1c1e;
   --muted: #5c6167;
   --faint: #8b9096;
-  --rule: #e4e5e1;
+  --rule: #e2e1da;
   --accent: #0f5a44;
   --accent-ink: #0c4a38;
-  --wash: #f4f6f2;
+  --wash: #eef1e9;
+
+  /* deep green panels (hero, footer) */
+  --deep: #0b4434;
+  --deep-edge: #093a2c;
+  --paper-on-deep: #f2f1e8;
+  --muted-on-deep: #a8c4b6;
+  --grid-on-deep: rgba(242, 241, 232, 0.07);
+  --grid-on-paper: rgba(15, 90, 68, 0.05);
 
   /* type */
   --font-display: "Archivo Variable", "Archivo", system-ui, sans-serif;

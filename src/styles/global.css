@@ -123,8 +123,47 @@ a:hover {
   padding-block: var(--s16);
   border-top: 1px solid var(--rule);
 }
+.section--wash {
+  background: var(--wash);
+  border-top: 1px solid var(--rule);
+}
 .section-head {
   margin-bottom: var(--s8);
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+}
+.section-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* deep green band (hero / footer bookends) */
+.band-deep {
+  background:
+    linear-gradient(var(--grid-on-deep) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-on-deep) 1px, transparent 1px),
+    var(--deep);
+  background-size: 2.5rem 2.5rem, 2.5rem 2.5rem, auto;
+  color: var(--paper-on-deep);
+}
+.band-deep a {
+  color: inherit;
+  text-decoration-color: var(--muted-on-deep);
+}
+.band-deep a:hover {
+  color: #fff;
+  text-decoration-color: #fff;
+}
+.band-deep .meta,
+.band-deep .eyebrow {
+  color: var(--muted-on-deep);
+}
+.band-deep ::selection {
+  background: var(--paper-on-deep);
+  color: var(--deep);
 }
 
 /* ledger rows: mono metadata left, content right */
@@ -138,9 +177,17 @@ a:hover {
   gap: var(--s2) var(--s6);
   align-items: baseline;
 }
+.ledger-row > :last-child {
+  border-left: 1px solid var(--rule);
+  padding-left: var(--s6);
+}
 @media (max-width: 40rem) {
   .ledger-row {
     grid-template-columns: 1fr;
+  }
+  .ledger-row > :last-child {
+    border-left: none;
+    padding-left: 0;
   }
 }
 
