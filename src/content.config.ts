@@ -119,7 +119,7 @@ const patents = defineCollection({
 const highlights = defineCollection({
   loader: glob({ pattern: "*.json", base: "src/content/highlights" }),
   schema: z.object({
-    type: z.enum(["youtube", "x", "linkedin", "github"]),
+    type: z.enum(["youtube", "x", "linkedin", "github", "press"]),
     url: z.string().url(),
     title: z.string(),
     date: z.coerce.date(),

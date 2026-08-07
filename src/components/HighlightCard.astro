@@ -8,7 +8,7 @@ interface Props {
 const { entry } = Astro.props;
 const h = entry.data;
 const dateLabel = h.date.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" });
-const platformLabel = { youtube: "YouTube", x: "X", linkedin: "LinkedIn", github: "GitHub" }[h.type];
+const platformLabel = { youtube: "YouTube", x: "X", linkedin: "LinkedIn", github: "GitHub", press: "Press" }[h.type];
 ---
 
 <article class={`highlight highlight-${h.type}`}>
@@ -34,7 +34,7 @@ const platformLabel = { youtube: "YouTube", x: "X", linkedin: "LinkedIn", github
     </a>
   )}
 
-  {(h.type === "x" || h.type === "linkedin") && (
+  {(h.type === "x" || h.type === "linkedin" || h.type === "press") && (
     <a class="quote-card" href={h.url} rel="noopener">
       <blockquote>{h.excerpt}</blockquote>
       <p class="attribution">{h.title} →</p>
