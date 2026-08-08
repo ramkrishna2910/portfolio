@@ -70,7 +70,7 @@ a:hover {
 
 ::selection {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--ink);
 }
 
 /* utility voice: mono metadata */
@@ -140,31 +140,6 @@ a:hover {
   background: var(--rule);
 }
 
-/* deep green band (hero / footer bookends) */
-.band-deep {
-  background:
-    linear-gradient(var(--grid-on-deep) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-on-deep) 1px, transparent 1px),
-    var(--deep);
-  background-size: 2.5rem 2.5rem, 2.5rem 2.5rem, auto;
-  color: var(--paper-on-deep);
-}
-.band-deep a {
-  color: inherit;
-  text-decoration-color: var(--muted-on-deep);
-}
-.band-deep a:hover {
-  color: #fff;
-  text-decoration-color: #fff;
-}
-.band-deep .meta,
-.band-deep .eyebrow {
-  color: var(--muted-on-deep);
-}
-.band-deep ::selection {
-  background: var(--paper-on-deep);
-  color: var(--deep);
-}
 
 /* ledger rows: mono metadata left, content right */
 .ledger {

@@ -35,7 +35,7 @@ Note: `src/content/profile/profile.json` and `src/content/interests/interests.js
 
 ## Design system
 
-Handwritten CSS only — no framework. Tokens in `src/styles/tokens.css` (cool paper `--bg`, blue-black `--ink`, solder-mask green `--accent`); base styles + shared patterns (`.shell`, `.ledger-row`, `.meta`, `.eyebrow`) in `src/styles/global.css`. Type: Archivo Variable (display, expanded caps), Source Serif 4 (body), IBM Plex Mono (metadata) — self-hosted via @fontsource, imported in `src/layouts/BaseLayout.astro`. Zero client JS except the GA snippet (PROD only) and the YouTube facade click handler in `YouTubeLite.astro` (no eager iframes — keep it that way).
+Handwritten CSS only — no framework. Tokens in `src/styles/tokens.css` (warm paper `--bg`, blue-black `--ink`, lemonade `--accent` #eab308 for graphic marks with dark-rind `--accent-ink` #854d0e for text accents); base styles + shared patterns (`.shell`, `.ledger-row`, `.meta`, `.eyebrow`) in `src/styles/global.css`. The homepage hero uses `KineticGrid.astro` — an interactive canvas grid (pointer warp + click ripples in lemon) that fades in/out via a CSS mask. Type: Archivo Variable (display, expanded caps), Source Serif 4 (body), IBM Plex Mono (metadata) — self-hosted via @fontsource, imported in `src/layouts/BaseLayout.astro`. Zero client JS except the GA snippet (PROD only) and the YouTube facade click handler in `YouTubeLite.astro` (no eager iframes — keep it that way).
 
 Dates in frontmatter are UTC; always pass `timeZone: "UTC"` to `toLocaleDateString` when formatting or days shift.
 
