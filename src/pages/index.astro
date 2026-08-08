@@ -171,7 +171,9 @@ for (const pr of c.projects) {
   .hero {
     position: relative;
     padding-block: var(--s24) var(--s16);
-    border-bottom: 1px solid var(--rule);
+  }
+  .hero + .section {
+    border-top: none;
   }
   .hero-content {
     position: relative;

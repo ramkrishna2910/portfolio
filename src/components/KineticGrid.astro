@@ -28,14 +28,13 @@
   const NODE_BASE_RADIUS = 1.8;
   const NODE_ACTIVE_RADIUS = 3.2;
 
-  // Light hero palette: white paper, ink lines, solder-green activity
-  const BG = "#ffffff";
+  // Transparent over the page paper; ink lines at rest, lemonade-yellow activity
   const LINE_BASE = { r: 26, g: 28, b: 30, a: 0.08 };
-  const LINE_ACTIVE = { r: 15, g: 90, b: 68, a: 0.85 };
+  const LINE_ACTIVE = { r: 202, g: 138, b: 4, a: 0.9 };
   const NODE_BASE = { r: 26, g: 28, b: 30, a: 0.14 };
-  const NODE_ACTIVE = { r: 15, g: 90, b: 68, a: 1 };
-  const GLOW = "15,90,68";
-  const RIPPLE = "15,90,68";
+  const NODE_ACTIVE = { r: 234, g: 179, b: 8, a: 1 };
+  const GLOW = "253,224,71";
+  const RIPPLE = "234,179,8";
 
   const lerpN = (a: number, b: number, t: number) => a + (b - a) * t;
 
@@ -132,8 +131,6 @@
 
     const draw = (now: number) => {
       ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = BG;
-      ctx.fillRect(0, 0, W, H);
 
       ctx.fillStyle = "rgba(26,28,30,0.05)";
       for (let x = DOT_SPACING / 2; x < W; x += DOT_SPACING) {
@@ -300,5 +297,20 @@
     width: 100%;
     height: 100%;
     z-index: 0;
+    /* dissolve into the page instead of a hard boundary */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 12%,
+      black 62%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 12%,
+      black 62%,
+      transparent 100%
+    );
   }
 </style>
