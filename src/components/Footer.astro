@@ -6,7 +6,7 @@ const p = profileEntry.data;
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer band-deep">
+<footer class="site-footer">
   <div class="shell-wide inner">
     <div class="contact">
       <p class="meta">Contact</p>
@@ -37,9 +37,14 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
-    border-top: 4px solid var(--deep-edge);
+    border-top: 1px solid var(--rule);
     margin-top: var(--s24);
     padding-block: var(--s12);
+    background: #fff;
+  }
+  .machines a,
+  .machines span {
+    color: var(--accent-ink);
   }
   .inner {
     display: grid;
@@ -66,8 +71,8 @@ const year = new Date().getFullYear();
   .colophon {
     grid-column: 1 / -1;
     font-size: var(--text-sm);
-    color: var(--muted-on-deep);
-    border-top: 1px solid var(--grid-on-deep);
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
     padding-top: var(--s6);
   }
   @media (max-width: 40rem) {
