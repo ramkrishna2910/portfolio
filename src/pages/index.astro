@@ -14,7 +14,7 @@ for (const pr of c.projects) {
 
 <BaseLayout>
   <!-- Hero -->
-  <section class="hero band-deep">
+  <section class="hero">
     <KineticGrid />
     <div class="shell-wide hero-content">
       <p class="eyebrow">Seattle, WA · On-device AI</p>
@@ -171,8 +171,7 @@ for (const pr of c.projects) {
   .hero {
     position: relative;
     padding-block: var(--s24) var(--s16);
-    border-bottom: 4px solid var(--deep-edge);
-    background-image: none; /* the kinetic canvas draws the grid */
+    border-bottom: 1px solid var(--rule);
   }
   .hero-content {
     position: relative;
@@ -189,7 +188,7 @@ for (const pr of c.projects) {
     text-transform: uppercase;
     letter-spacing: 0.01em;
     margin-block: var(--s4) var(--s6);
-    color: #fff;
+    color: var(--ink);
   }
   .headline {
     font-size: var(--text-lg);
@@ -203,15 +202,16 @@ for (const pr of c.projects) {
     gap: var(--s4);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    border: 1px solid var(--grid-on-deep);
-    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid var(--rule);
+    background: color-mix(in srgb, var(--wash) 80%, transparent);
     padding: var(--s3) var(--s4);
   }
   .hero-machines a {
+    color: var(--accent-ink);
     text-decoration-color: transparent;
   }
   .hero-machines a:hover {
-    text-decoration-color: var(--paper-on-deep);
+    text-decoration-color: var(--accent);
   }
 
   .about-grid {

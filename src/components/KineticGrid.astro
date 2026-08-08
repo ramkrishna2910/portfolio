@@ -28,14 +28,14 @@
   const NODE_BASE_RADIUS = 1.8;
   const NODE_ACTIVE_RADIUS = 3.2;
 
-  // Solder-mask green hero palette
-  const BG = "#0b4434";
-  const LINE_BASE = { r: 242, g: 241, b: 232, a: 0.1 };
-  const LINE_ACTIVE = { r: 242, g: 241, b: 232, a: 0.85 };
-  const NODE_BASE = { r: 242, g: 241, b: 232, a: 0.18 };
-  const NODE_ACTIVE = { r: 255, g: 255, b: 255, a: 1 };
-  const GLOW = "214,235,222";
-  const RIPPLE = "214,235,222";
+  // Light hero palette: white paper, ink lines, solder-green activity
+  const BG = "#ffffff";
+  const LINE_BASE = { r: 26, g: 28, b: 30, a: 0.08 };
+  const LINE_ACTIVE = { r: 15, g: 90, b: 68, a: 0.85 };
+  const NODE_BASE = { r: 26, g: 28, b: 30, a: 0.14 };
+  const NODE_ACTIVE = { r: 15, g: 90, b: 68, a: 1 };
+  const GLOW = "15,90,68";
+  const RIPPLE = "15,90,68";
 
   const lerpN = (a: number, b: number, t: number) => a + (b - a) * t;
 
@@ -135,7 +135,7 @@
       ctx.fillStyle = BG;
       ctx.fillRect(0, 0, W, H);
 
-      ctx.fillStyle = "rgba(242,241,232,0.05)";
+      ctx.fillStyle = "rgba(26,28,30,0.05)";
       for (let x = DOT_SPACING / 2; x < W; x += DOT_SPACING) {
         for (let y = DOT_SPACING / 2; y < H; y += DOT_SPACING) {
           ctx.beginPath();
