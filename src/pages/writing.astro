@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import EntryCard from "../components/EntryCard.astro";
 import { loadAll } from "../lib/content";
 
 const c = await loadAll();
@@ -29,17 +28,17 @@ const jsonLdExtra = c.writing.map((w) => ({
         ecosystems, and whatever else earns an essay.
       </p>
     </header>
-    <div class="ledger">
+    <div class="card-grid">
       {
         c.writing.map((w) => (
-          <EntryCard
-            meta={w.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" })}
-            title={w.data.title}
-            href={w.data.url}
-            sub={w.data.venue}
-          >
-            {bodies.get(w.id)}
-          </EntryCard>
+          <a class="card" href={w.data.url} rel="noopener">
+            <p class="meta">
+              {w.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" })}
+              &nbsp;·&nbsp;{w.data.venue}
+            </p>
+            <h2>{w.data.title}</h2>
+            <p class="summary">{bodies.get(w.id)}</p>
+          </a>
         ))
       }
     </div>
@@ -59,7 +58,48 @@ const jsonLdExtra = c.writing.map((w) => ({
     margin-top: var(--s3);
     color: var(--muted);
   }
-  .ledger {
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr));
+    gap: var(--s4);
     padding-bottom: var(--s16);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+    aspect-ratio: 1 / 1;
+    padding: var(--s6);
+    border: 1px solid var(--rule);
+    background: #fff;
+    text-decoration: none;
+    transition: border-color 120ms ease, background 120ms ease;
+    overflow: hidden;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    background: var(--wash);
+  }
+  .card h2 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+  }
+  .card:hover h2 {
+    color: var(--accent-ink);
+  }
+  .summary {
+    color: var(--muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  @media (max-width: 40rem) {
+    .card {
+      aspect-ratio: auto;
+    }
   }
 </style>
