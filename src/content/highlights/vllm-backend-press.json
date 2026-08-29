@@ -1,8 +1,8 @@
 {
   "type": "press",
   "url": "https://netstatz.com/vllm-rdna-cdna-bridge/",
-  "title": "Credited for Lemonade's vLLM backend",
+  "title": "One vLLM Stack, Two Architectures: Prototype on RDNA, Scale to an MI300X for the Price of Lunch",
   "date": "2026-07-23",
-  "note": "Netstatz engineering blog",
-  "excerpt": "“Ramakrishnan Sivakumar at AMD authored the original vLLM backend” — third-party engineering write-up on taking Lemonade's vLLM stack from consumer RDNA hardware to datacenter MI300X GPUs."
+  "note": "Netstatz",
+  "excerpt": "“Ramakrishnan Sivakumar at AMD authored the original vLLM backend, and Jeremy Fowers led the refactor.”"
 }

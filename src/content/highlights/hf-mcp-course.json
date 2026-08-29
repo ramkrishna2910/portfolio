@@ -1,0 +1,8 @@
+{
+  "type": "press",
+  "url": "https://huggingface.co/learn/mcp-course/unit2/lemonade-server",
+  "title": "Hugging Face MCP Course: Lemonade Server unit",
+  "date": "2025-07-08",
+  "note": "Hugging Face",
+  "excerpt": "“AMD Partnered with Hugging Face to provide a guide on how to accelerate our end-to-end Tiny Agents application using AMD Neural Processing Unit (NPU) and integrated GPU (iGPU).”"
+}
