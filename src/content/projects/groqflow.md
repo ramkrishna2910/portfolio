@@ -3,7 +3,7 @@ name: GroqFlow
 url: https://github.com/groq/groqflow
 repo: groq/groqflow
 role: Co-creator
-featured: false
+featured: true
 order: 3
 tagline: One-function-call compilation from PyTorch/ONNX to the Groq LPU
 tech: ["Python", "ONNX", "Groq LPU", "ML compilers"]

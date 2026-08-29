@@ -6,10 +6,6 @@ import { loadAll, fmtRange } from "../lib/content";
 const c = await loadAll();
 const p = c.profile;
 const featured = c.projects.filter((pr) => pr.data.featured);
-const projectBodies = new Map<string, string>();
-for (const pr of c.projects) {
-  projectBodies.set(pr.id, pr.body?.trim() ?? "");
-}
 ---
 
 <BaseLayout>
@@ -39,7 +35,11 @@ for (const pr of c.projects) {
       <div class="section-head"><h2 id="about-h" class="eyebrow">About</h2></div>
       <div class="about-grid">
         <div class="about-prose">
-          {p.longBio.map((para) => <p>{para}</p>)}
+          <p>{p.longBio[0]}</p>
+          <p class="more meta">
+            <a rel="alternate" type="text/markdown" href="/resume.md">cat /resume.md</a> for the
+            long version
+          </p>
         </div>
         <aside class="facts" aria-label="At a glance">
           <p class="meta facts-title">At a glance</p>
@@ -50,6 +50,23 @@ for (const pr of c.projects) {
             <div><dt>Shipping since</dt><dd>2016 · Intel → Groq → AMD</dd></div>
             <div><dt>Patents</dt><dd>2 granted (US)</dd></div>
             <div><dt>Community</dt><dd>ONNX Model Zoo · meetup panels</dd></div>
+            <div>
+              <dt>Off hours</dt>
+              <dd>
+                {c.interests.map((i, idx) => (
+                  <>
+                    {i.data.url ? (
+                      <a href={i.data.url} rel="noopener">
+                        {i.data.label}
+                      </a>
+                    ) : (
+                      i.data.label
+                    )}
+                    {idx < c.interests.length - 1 && " · "}
+                  </>
+                ))}
+              </dd>
+            </div>
           </dl>
         </aside>
       </div>
@@ -60,39 +77,33 @@ for (const pr of c.projects) {
   <section class="section" aria-labelledby="exp-h">
     <div class="shell-wide">
       <div class="section-head"><h2 id="exp-h" class="eyebrow">Experience</h2></div>
-      <div class="ledger">
+      <div class="exp-list">
         {
           c.experience.map((e) => (
-            <article class="ledger-row">
+            <article class="exp-row">
               <p class="meta">{fmtRange(e.data.start, e.data.end)}</p>
-              <div>
-                <h3>
-                  {e.data.title} ·{" "}
-                  <a href={e.data.companyUrl} rel="noopener">
-                    {e.data.company}
-                  </a>
-                </h3>
-                <ul class="role-highlights">
-                  {e.data.highlights.map((h) => (
-                    <li>{h}</li>
-                  ))}
-                </ul>
-              </div>
+              <h3>
+                {e.data.title} ·{" "}
+                <a href={e.data.companyUrl} rel="noopener">
+                  {e.data.company}
+                </a>
+              </h3>
             </article>
           ))
         }
-        <article class="ledger-row">
+        <article class="exp-row">
           <p class="meta">
             {c.education.start.slice(0, 4)} — {c.education.end.slice(0, 4)}
           </p>
-          <div>
-            <h3>
-              {c.education.degree}, {c.education.field} ·{" "}
-              <a href={c.education.institutionUrl} rel="noopener">{c.education.institution}</a>
-            </h3>
-          </div>
+          <h3>
+            MS, {c.education.field} ·{" "}
+            <a href={c.education.institutionUrl} rel="noopener">UNC Charlotte</a>
+          </h3>
         </article>
       </div>
+      <p class="more meta">
+        Role details in <a rel="alternate" type="text/markdown" href="/resume.md">/resume.md</a>
+      </p>
     </div>
   </section>
 
@@ -100,69 +111,17 @@ for (const pr of c.projects) {
   <section class="section section--wash" aria-labelledby="work-h">
     <div class="shell-wide">
       <div class="section-head"><h2 id="work-h" class="eyebrow">Selected work</h2></div>
-      <div class="ledger">
+      <div class="work-grid">
         {
           featured.map((pr) => (
-            <article class="ledger-row">
+            <a class="work-card" href={pr.data.url} rel="noopener">
               <p class="meta">{pr.data.role}</p>
-              <div>
-                <h3>
-                  <a href={pr.data.url} rel="noopener">
-                    {pr.data.name}
-                  </a>
-                  <span class="tagline"> — {pr.data.tagline}</span>
-                </h3>
-                <p class="project-body">{projectBodies.get(pr.id)}</p>
-                <p class="tech meta">{pr.data.tech.join(" · ")}</p>
-              </div>
-            </article>
+              <h3>{pr.data.name}</h3>
+              <p class="tagline">{pr.data.tagline}</p>
+            </a>
           ))
         }
       </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section class="section" aria-labelledby="skills-h">
-    <div class="shell-wide">
-      <div class="section-head"><h2 id="skills-h" class="eyebrow">Skills</h2></div>
-      <div class="skills-grid">
-        {
-          p.skillGroups.map((g) => (
-            <div>
-              <h3>{g.label}</h3>
-              <ul>
-                {g.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Interests -->
-  <section class="section" aria-labelledby="interests-h">
-    <div class="shell-wide">
-      <div class="section-head"><h2 id="interests-h" class="eyebrow">Off hours</h2></div>
-      <p class="interests">
-        {
-          c.interests.map((i, idx) => (
-            <>
-              {i.data.url ? (
-                <a href={i.data.url} rel="noopener">
-                  {i.data.label}
-                </a>
-              ) : (
-                <span>{i.data.label}</span>
-              )}
-              {idx < c.interests.length - 1 && <span class="sep" aria-hidden="true"> · </span>}
-            </>
-          ))
-        }
-      </p>
     </div>
   </section>
 </BaseLayout>
@@ -170,7 +129,7 @@ for (const pr of c.projects) {
 <style>
   .hero {
     position: relative;
-    padding-block: var(--s24) var(--s16);
+    padding-block: var(--s16) var(--s12);
   }
   .hero + .section {
     border-top: none;
@@ -216,19 +175,27 @@ for (const pr of c.projects) {
     text-decoration-color: var(--accent);
   }
 
+  /* compact sections */
+  .section {
+    padding-block: var(--s12);
+  }
+
   .about-grid {
     display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(15rem, 1fr);
+    grid-template-columns: minmax(0, 3fr) minmax(15rem, 2fr);
     gap: var(--s8) var(--s16);
     align-items: start;
   }
   .about-prose {
-    columns: 2;
-    column-gap: var(--s12);
-    column-rule: 1px solid var(--rule);
+    max-width: var(--measure);
   }
-  .about-prose p + p {
+  .more {
     margin-top: var(--s4);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+  .more a {
+    color: var(--accent-ink);
   }
   .facts {
     border: 1px solid var(--rule);
@@ -268,64 +235,61 @@ for (const pr of c.projects) {
     .about-grid {
       grid-template-columns: 1fr;
     }
-    .about-prose {
-      columns: 1;
+  }
+
+  .exp-list {
+    display: grid;
+  }
+  .exp-row {
+    display: grid;
+    grid-template-columns: var(--meta-col) 1fr;
+    gap: var(--s2) var(--s6);
+    align-items: baseline;
+    padding-block: var(--s3);
+    border-bottom: 1px solid var(--rule);
+  }
+  .exp-row:last-child {
+    border-bottom: none;
+  }
+  .exp-row h3 {
+    font-size: var(--text-base);
+    font-weight: 600;
+  }
+  @media (max-width: 40rem) {
+    .exp-row {
+      grid-template-columns: 1fr;
+      gap: 0;
     }
   }
 
-  h3 {
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+    gap: var(--s4);
+  }
+  .work-card {
+    display: grid;
+    gap: var(--s2);
+    align-content: start;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    padding: var(--s6);
+    text-decoration: none;
+    transition: border-color 120ms ease;
+  }
+  .work-card:hover {
+    border-color: var(--accent);
+  }
+  .work-card h3 {
     font-size: var(--text-lg);
     font-weight: 600;
   }
-  .role-highlights {
-    margin-top: var(--s2);
-    padding-left: 1.1em;
+  .work-card:hover h3 {
+    color: var(--accent-ink);
+  }
+  .work-card .tagline {
     color: var(--muted);
     font-size: var(--text-sm);
     line-height: var(--leading-normal);
-    max-width: var(--measure);
-    display: grid;
-    gap: var(--s1);
-  }
-  .tagline {
-    font-weight: 400;
-    color: var(--muted);
-  }
-  .project-body {
-    margin-top: var(--s2);
-    color: var(--muted);
-    font-size: var(--text-sm);
-    line-height: var(--leading-normal);
-    max-width: var(--measure);
-  }
-  .tech {
-    margin-top: var(--s2);
-    text-transform: none;
-    letter-spacing: 0.02em;
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: var(--s8);
-  }
-  .skills-grid h3 {
-    font-size: var(--text-base);
-    margin-bottom: var(--s2);
-  }
-  .skills-grid ul {
-    padding-left: 1.1em;
-    color: var(--muted);
-    font-size: var(--text-sm);
-    line-height: var(--leading-normal);
-    display: grid;
-    gap: var(--s1);
-  }
-
-  .interests {
-    font-size: var(--text-base);
-  }
-  .sep {
-    color: var(--faint);
   }
 </style>
