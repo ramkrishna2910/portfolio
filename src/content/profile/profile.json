@@ -112,7 +112,7 @@
       {
         "title": "Lemonade",
         "role": "Co-creator & maintainer",
-        "description": "Open-source local AI server — LLMs, speech, and image generation on your own hardware, with NPU and GPU acceleration.",
+        "description": "Open-source local AI server: LLMs, speech, and image generation on your own hardware, with NPU and GPU acceleration.",
         "url": "https://github.com/lemonade-sdk/lemonade"
       },
       {
