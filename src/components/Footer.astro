@@ -8,27 +8,12 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="shell-wide inner">
-    <div class="contact">
-      <p class="meta">Contact</p>
-      <ul>
-        <li><a href={`mailto:${p.email}`}>{p.email}</a></li>
-        {p.socials.map((s) => (
-          <li>
-            <a href={s.url} rel="me">{s.label}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div class="machines">
-      <p class="meta">For machines</p>
-      <ul>
-        <li>
-          <a rel="alternate" type="text/markdown" href="/resume.md">GET /resume.md</a>
-        </li>
-        <li><a href="/llms.txt">GET /llms.txt</a></li>
-        <li><span>schema.org/Person&nbsp;&#10003;</span></li>
-      </ul>
-    </div>
+    <p class="machines">
+      <span class="meta">For machines&nbsp;→</span>
+      <a rel="alternate" type="text/markdown" href="/resume.md">GET /resume.md</a>
+      <a href="/llms.txt">GET /llms.txt</a>
+      <span>schema.org/Person&nbsp;&#10003;</span>
+    </p>
     <p class="colophon">
       &copy; {year} {p.name}. Hand-built, statically generated, readable by humans and agents alike.
     </p>
@@ -38,46 +23,28 @@ const year = new Date().getFullYear();
 <style>
   .site-footer {
     border-top: 1px solid var(--rule);
-    margin-top: var(--s24);
-    padding-block: var(--s12);
+    margin-top: var(--s16);
+    padding-block: var(--s8);
     background: #fff;
-  }
-  .machines a,
-  .machines span {
-    color: var(--accent-ink);
   }
   .inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s8);
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin-top: var(--s3);
-    display: grid;
-    gap: var(--s1);
-  }
-  .contact a {
-    font-size: var(--text-sm);
+    gap: var(--s4);
   }
   .machines {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--s2) var(--s6);
     font-family: var(--font-mono);
+    font-size: var(--text-sm);
   }
   .machines a,
-  .machines span {
-    font-size: var(--text-sm);
+  .machines span:not(.meta) {
+    color: var(--accent-ink);
   }
   .colophon {
-    grid-column: 1 / -1;
     font-size: var(--text-sm);
     color: var(--muted);
-    border-top: 1px solid var(--rule);
-    padding-top: var(--s6);
-  }
-  @media (max-width: 40rem) {
-    .inner {
-      grid-template-columns: 1fr;
-    }
   }
 </style>
