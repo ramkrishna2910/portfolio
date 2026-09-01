@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import KineticGrid from "../components/KineticGrid.astro";
+import SocialLinks from "../components/SocialLinks.astro";
 import { loadAll, fmtRange } from "../lib/content";
 
 const c = await loadAll();
@@ -21,11 +22,9 @@ const featured = c.projects.filter((pr) => pr.data.featured);
         <a href="https://github.com/lemonade-sdk/lemonade" rel="noopener">Lemonade</a>, the
         open-source local AI server.
       </p>
-      <p class="hero-machines" aria-label="Machine-readable versions of this site">
-        <span class="meta">for agents&nbsp;→</span>
-        <a rel="alternate" type="text/markdown" href="/resume.md">/resume.md</a>
-        <a href="/llms.txt">/llms.txt</a>
-      </p>
+      <div class="hero-socials">
+        <SocialLinks />
+      </div>
     </div>
   </section>
 
@@ -138,8 +137,7 @@ const featured = c.projects.filter((pr) => pr.data.featured);
     position: relative;
     z-index: 1;
   }
-  .hero-content a,
-  .hero-machines {
+  .hero-content a {
     pointer-events: auto;
   }
   .hero h1 {
@@ -156,23 +154,8 @@ const featured = c.projects.filter((pr) => pr.data.featured);
     line-height: var(--leading-normal);
     max-width: 34em;
   }
-  .hero-machines {
+  .hero-socials {
     margin-top: var(--s8);
-    display: inline-flex;
-    align-items: baseline;
-    gap: var(--s4);
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    border: 1px solid var(--rule);
-    background: color-mix(in srgb, var(--wash) 80%, transparent);
-    padding: var(--s3) var(--s4);
-  }
-  .hero-machines a {
-    color: var(--accent-ink);
-    text-decoration-color: transparent;
-  }
-  .hero-machines a:hover {
-    text-decoration-color: var(--accent);
   }
 
   /* compact sections */
