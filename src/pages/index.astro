@@ -13,6 +13,29 @@ const logos: Record<string, string> = {
   Groq: "/logos/groq.svg",
   Intel: "/logos/intel.svg",
 };
+
+const yr = (ym: string) => ym.slice(0, 4);
+const timeline = [
+  {
+    logo: "/logos/uncc.svg",
+    company: "UNC Charlotte",
+    url: c.education.institutionUrl,
+    title: `MS, ${c.education.field}`,
+    dates: `${yr(c.education.start)} – ${yr(c.education.end).slice(2)}`,
+    current: false,
+  },
+  ...c.experience
+    .slice()
+    .reverse()
+    .map((e) => ({
+      logo: logos[e.data.company]!,
+      company: e.data.company,
+      url: e.data.companyUrl,
+      title: e.data.title,
+      dates: e.data.end ? `${yr(e.data.start)} – ${yr(e.data.end).slice(2)}` : `${yr(e.data.start)} – now`,
+      current: !e.data.end,
+    })),
+];
 ---
 
 <BaseLayout>
@@ -39,42 +62,21 @@ const logos: Record<string, string> = {
   <section class="section" aria-labelledby="exp-h">
     <div class="shell-wide">
       <div class="section-head"><h2 id="exp-h" class="eyebrow">Experience</h2></div>
-      <div class="exp-list">
+      <ol class="timeline">
         {
-          c.experience.map((e) => (
-            <article class="exp-row">
-              <span class="logo-tile">
-                <img src={logos[e.data.company]} alt="" loading="lazy" width="28" height="28" />
-              </span>
-              <div>
-                <h3>
-                  {e.data.title} ·{" "}
-                  <a href={e.data.companyUrl} rel="noopener">
-                    {e.data.company}
-                  </a>
-                </h3>
-                <p class="meta">
-                  {fmtRange(e.data.start, e.data.end)} · {e.data.location}
-                </p>
-              </div>
-            </article>
+          timeline.map((t) => (
+            <li class="tl-item">
+              <img class="tl-logo" src={t.logo} alt="" loading="lazy" />
+              <span class:list={["tl-dot", { "tl-dot--now": t.current }]} aria-hidden="true" />
+              <p class="meta tl-dates">{t.dates}</p>
+              <h3>{t.title}</h3>
+              <a class="tl-company" href={t.url} rel="noopener">
+                {t.company}
+              </a>
+            </li>
           ))
         }
-        <article class="exp-row">
-          <span class="logo-tile">
-            <img src="/logos/uncc.svg" alt="" loading="lazy" width="28" height="28" />
-          </span>
-          <div>
-            <h3>
-              MS, {c.education.field} ·{" "}
-              <a href={c.education.institutionUrl} rel="noopener">UNC Charlotte</a>
-            </h3>
-            <p class="meta">
-              {c.education.start.slice(0, 4)} — {c.education.end.slice(0, 4)} · Charlotte, NC
-            </p>
-          </div>
-        </article>
-      </div>
+      </ol>
       <p class="more meta">
         Role details in <a rel="alternate" type="text/markdown" href="/resume.md">/resume.md</a>
       </p>
@@ -139,44 +141,85 @@ const logos: Record<string, string> = {
   }
 
 
-  .exp-list {
+  .timeline {
+    position: relative;
     display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--s6);
+    list-style: none;
+    padding: var(--s6) 0 var(--s2);
+    margin: 0;
   }
-  .exp-row {
-    display: grid;
-    grid-template-columns: 3.25rem 1fr;
-    gap: var(--s5);
-    align-items: center;
-    padding-block: var(--s5);
-    border-bottom: 1px solid var(--rule);
+  /* the rail: runs through the dots */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--s6) + 2rem + var(--s4) + 5px);
+    height: 2px;
+    background: var(--rule);
   }
-  .exp-row:last-child {
-    border-bottom: none;
+  .tl-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .logo-tile {
-    display: grid;
-    place-items: center;
-    width: 3.25rem;
-    height: 3.25rem;
-    border: 1px solid var(--rule);
-    background: #fff;
-  }
-  .logo-tile img {
-    width: 1.9rem;
-    height: 1.9rem;
+  .tl-logo {
+    height: 2rem;
+    width: auto;
+    max-width: 6rem;
     object-fit: contain;
-    filter: grayscale(1) opacity(0.65);
+    object-position: left center;
+    filter: grayscale(1) opacity(0.7);
     transition: filter 120ms ease;
   }
-  .exp-row:hover .logo-tile img {
+  .tl-item:hover .tl-logo {
     filter: none;
   }
-  .exp-row h3 {
-    font-size: var(--text-lg);
-    font-weight: 600;
+  .tl-dot {
+    position: relative;
+    z-index: 1;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    outline: 3px solid var(--bg);
+    margin-block: var(--s4);
   }
-  .exp-row .meta {
+  .tl-dot--now {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .tl-dates {
+    margin-bottom: var(--s2);
+  }
+  .tl-item h3 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: var(--leading-normal);
+  }
+  .tl-company {
     margin-top: var(--s1);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--muted);
+    text-decoration-color: transparent;
+  }
+  .tl-company:hover {
+    color: var(--accent-ink);
+  }
+  @media (max-width: 48rem) {
+    .timeline {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s8) var(--s6);
+    }
+    .timeline::before,
+    .tl-dot {
+      display: none;
+    }
+    .tl-logo {
+      margin-bottom: var(--s3);
+    }
   }
 
   .work-grid {
