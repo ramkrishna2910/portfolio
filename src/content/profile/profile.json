@@ -2,12 +2,12 @@
   {
     "id": "profile",
     "name": "Ramakrishnan Sivakumar",
-    "headline": "Principal Engineer at AMD \u2014 on-device AI",
-    "shortBio": "Principal Engineer at AMD working on on-device AI: running large language models efficiently on consumer hardware. Maintainer of Lemonade, an open-source SDK for local LLM inference.",
+    "headline": "Principal ML Software Engineer at AMD — on-device AI",
+    "shortBio": "Principal ML Software Engineer at AMD working on on-device AI: running large language models efficiently on consumer hardware. Co-creator and maintainer of Lemonade, an open-source SDK for local LLM inference.",
     "longBio": [
-      "I'm a machine learning systems engineer with over a decade of experience making AI faster on the hardware it runs on. My current focus is on-device AI \u2014 getting large language models to run efficiently on consumer hardware such as laptops and workstations with NPUs and integrated GPUs.",
-      "I maintain Lemonade (5k+ GitHub stars, sponsored by AMD), an open-source local AI server that runs LLMs, speech-to-text, text-to-speech, and image generation fully locally with NPU and GPU acceleration, exposing OpenAI-, Anthropic-, and Ollama-compatible APIs. I previously co-created TurnkeyML (now in the ONNX organization) and GroqFlow. Across roles at Intel, Groq, and now AMD, I've shipped ML compilers, AI accelerator software, and developer tools spanning ONNX, ONNX Runtime, llama.cpp, and ROCm \u2014 and contributed over 2,000 models to the ONNX Model Zoo.",
-      "I hold two granted US patents on thread scheduling and power management, publish research on AI accelerator evaluation, and am active in the ONNX community \u2014 presenting the relaunched ONNX Model Zoo and moderating the 2025 ONNX Community Meetup panel on interoperability and standardization in AI."
+      "I'm a machine learning systems engineer with over a decade of experience making AI faster on the hardware it runs on. My current focus is on-device AI — getting large language models to run efficiently on consumer hardware such as laptops and workstations with NPUs and integrated GPUs.",
+      "I co-created and maintain Lemonade (5k+ GitHub stars, sponsored by AMD), an open-source local AI server that runs LLMs, speech-to-text, text-to-speech, and image generation fully locally with NPU and GPU acceleration, exposing OpenAI-, Anthropic-, and Ollama-compatible APIs. I previously co-created TurnkeyML (now in the ONNX organization) and GroqFlow. Across roles at Intel, Groq, and now AMD, I've shipped ML compilers, AI accelerator software, and developer tools spanning ONNX, ONNX Runtime, llama.cpp, and ROCm — and contributed over 2,000 models to the ONNX Model Zoo.",
+      "I hold two granted US patents on thread scheduling and power management, publish research on AI accelerator evaluation, and am active in the ONNX community — presenting the relaunched ONNX Model Zoo and moderating the 2025 ONNX Community Meetup panel on interoperability and standardization in AI."
     ],
     "location": "Seattle, Washington, USA",
     "email": "ramkrishna2910@gmail.com",

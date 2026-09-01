@@ -17,57 +17,14 @@ const featured = c.projects.filter((pr) => pr.data.featured);
       <p class="eyebrow">Seattle, WA · On-device AI</p>
       <h1>Ramakrishnan<br />Sivakumar</h1>
       <p class="headline">
-        Principal Engineer at <a href="https://www.amd.com" rel="noopener">AMD</a>, making large
-        language models run fast on the hardware people already own. Maintainer of
+        Principal ML Software Engineer at
+        <a href="https://www.amd.com" rel="noopener">AMD</a>. I make large language models run
+        fast on hardware people already own — as co-creator and maintainer of
         <a href="https://github.com/lemonade-sdk/lemonade" rel="noopener">Lemonade</a>, the
-        open-source local AI server.
+        open-source local AI server (5k+ stars).
       </p>
       <div class="hero-socials">
         <SocialLinks />
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section class="section" aria-labelledby="about-h">
-    <div class="shell-wide">
-      <div class="section-head"><h2 id="about-h" class="eyebrow">About</h2></div>
-      <div class="about-grid">
-        <div class="about-prose">
-          <p>{p.longBio[0]}</p>
-          <p class="more meta">
-            <a rel="alternate" type="text/markdown" href="/resume.md">cat /resume.md</a> for the
-            long version
-          </p>
-        </div>
-        <aside class="facts" aria-label="At a glance">
-          <p class="meta facts-title">At a glance</p>
-          <dl>
-            <div><dt>Role</dt><dd>Principal Engineer, AMD</dd></div>
-            <div><dt>Focus</dt><dd>On-device AI · local LLMs</dd></div>
-            <div><dt>Open source</dt><dd>Lemonade — 5.3k★</dd></div>
-            <div><dt>Shipping since</dt><dd>2016 · Intel → Groq → AMD</dd></div>
-            <div><dt>Patents</dt><dd>2 granted (US)</dd></div>
-            <div><dt>Community</dt><dd>ONNX Model Zoo · meetup panels</dd></div>
-            <div>
-              <dt>Off hours</dt>
-              <dd>
-                {c.interests.map((i, idx) => (
-                  <>
-                    {i.data.url ? (
-                      <a href={i.data.url} rel="noopener">
-                        {i.data.label}
-                      </a>
-                    ) : (
-                      i.data.label
-                    )}
-                    {idx < c.interests.length - 1 && " · "}
-                  </>
-                ))}
-              </dd>
-            </div>
-          </dl>
-        </aside>
       </div>
     </div>
   </section>
@@ -163,62 +120,6 @@ const featured = c.projects.filter((pr) => pr.data.featured);
     padding-block: var(--s12);
   }
 
-  .about-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(15rem, 2fr);
-    gap: var(--s8) var(--s16);
-    align-items: start;
-  }
-  .about-prose {
-    max-width: var(--measure);
-  }
-  .more {
-    margin-top: var(--s4);
-    text-transform: none;
-    letter-spacing: 0.02em;
-  }
-  .more a {
-    color: var(--accent-ink);
-  }
-  .facts {
-    border: 1px solid var(--rule);
-    background: var(--wash);
-    padding: var(--s6);
-  }
-  .facts-title {
-    color: var(--accent-ink);
-    margin-bottom: var(--s4);
-  }
-  .facts dl {
-    display: grid;
-    gap: var(--s3);
-  }
-  .facts div {
-    display: grid;
-    gap: 2px;
-    padding-top: var(--s3);
-    border-top: 1px solid var(--rule);
-  }
-  .facts div:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-  .facts dt {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-  }
-  .facts dd {
-    margin: 0;
-    font-size: var(--text-sm);
-  }
-  @media (max-width: 56rem) {
-    .about-grid {
-      grid-template-columns: 1fr;
-    }
-  }
 
   .exp-list {
     display: grid;

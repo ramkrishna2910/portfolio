@@ -2,7 +2,7 @@
 name: Lemonade
 url: https://github.com/lemonade-sdk/lemonade
 repo: lemonade-sdk/lemonade
-role: Maintainer
+role: Co-creator & maintainer
 featured: true
 order: 1
 tagline: Open-source local AI server — LLMs, speech, and image generation on your own hardware
