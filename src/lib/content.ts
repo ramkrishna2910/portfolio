@@ -40,6 +40,12 @@ export async function loadAll() {
   };
 }
 
+// Plain-text outputs (resume.md, llms.txt) avoid em dashes — they render
+// poorly in many terminals and markdown viewers. HTML pages keep them.
+export function plainDashes(s: string): string {
+  return s.replace(/\s*—\s*/g, " - ").replace(/—/g, "-");
+}
+
 export function fmtRange(start: string, end: string | null): string {
   const fmt = (ym: string) => {
     const [y, m] = ym.split("-").map(Number);

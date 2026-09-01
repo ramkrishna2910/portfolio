@@ -1,4 +1,4 @@
-import { loadAll } from "./content";
+import { loadAll, plainDashes } from "./content";
 
 // Builds /llms.txt per the llmstxt.org format: H1 name, blockquote summary,
 // context paragraph, then H2 sections of [title](absolute-url): description.
@@ -74,5 +74,5 @@ export async function buildLlmsTxt(site: URL): Promise<string> {
   lines.push(`- [Highlights](${abs("highlights")}): curated cross-platform highlights`);
   lines.push("");
 
-  return lines.join("\n");
+  return plainDashes(lines.join("\n"));
 }

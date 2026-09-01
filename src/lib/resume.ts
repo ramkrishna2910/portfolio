@@ -1,4 +1,4 @@
-import { loadAll, fmtRange } from "./content";
+import { loadAll, fmtRange, plainDashes } from "./content";
 
 // Builds the agent-readable markdown resume. Pure function of the content
 // collections — never edit the output by hand; edit src/content/ instead.
@@ -115,5 +115,5 @@ export async function buildResumeMarkdown(site: URL): Promise<string> {
   );
   lines.push("");
 
-  return lines.join("\n");
+  return plainDashes(lines.join("\n"));
 }
