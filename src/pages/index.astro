@@ -15,27 +15,48 @@ const logos: Record<string, string> = {
 };
 
 const yr = (ym: string) => ym.slice(0, 4);
-const timeline = [
+
+// One timeline stop per company: consecutive roles at the same place merge,
+// latest title leads and earlier titles stack beneath it.
+interface Stop {
+  logo: string;
+  company: string;
+  url: string;
+  titles: string[];
+  start: string;
+  end: string | null;
+}
+const stops: Stop[] = [
   {
     logo: "/logos/uncc.svg",
     company: "UNC Charlotte",
     url: c.education.institutionUrl,
-    title: `MS, ${c.education.field}`,
-    dates: `${yr(c.education.start)} – ${yr(c.education.end).slice(2)}`,
-    current: false,
+    titles: [`MS, ${c.education.field}`],
+    start: c.education.start,
+    end: c.education.end,
   },
-  ...c.experience
-    .slice()
-    .reverse()
-    .map((e) => ({
+];
+for (const e of c.experience.slice().reverse()) {
+  const last = stops[stops.length - 1];
+  if (last && last.company === e.data.company) {
+    last.titles.unshift(e.data.title);
+    last.end = e.data.end;
+  } else {
+    stops.push({
       logo: logos[e.data.company]!,
       company: e.data.company,
       url: e.data.companyUrl,
-      title: e.data.title,
-      dates: e.data.end ? `${yr(e.data.start)} – ${yr(e.data.end).slice(2)}` : `${yr(e.data.start)} – now`,
-      current: !e.data.end,
-    })),
-];
+      titles: [e.data.title],
+      start: e.data.start,
+      end: e.data.end,
+    });
+  }
+}
+const timeline = stops.map((s) => ({
+  ...s,
+  dates: s.end ? `${yr(s.start)} – ${yr(s.end).slice(2)}` : `${yr(s.start)} – now`,
+  current: !s.end,
+}));
 ---
 
 <BaseLayout>
@@ -62,14 +83,15 @@ const timeline = [
   <section class="section" aria-labelledby="exp-h">
     <div class="shell-wide">
       <div class="section-head"><h2 id="exp-h" class="eyebrow">Experience</h2></div>
-      <ol class="timeline">
+      <ol class="timeline" style={`--stops: ${timeline.length}`}>
         {
           timeline.map((t) => (
             <li class="tl-item">
               <img class="tl-logo" src={t.logo} alt="" loading="lazy" />
               <span class:list={["tl-dot", { "tl-dot--now": t.current }]} aria-hidden="true" />
               <p class="meta tl-dates">{t.dates}</p>
-              <h3>{t.title}</h3>
+              <h3>{t.titles[0]}</h3>
+              {t.titles.length > 1 && <p class="tl-prev">{t.titles.slice(1).join(" · ")}</p>}
               <a class="tl-company" href={t.url} rel="noopener">
                 {t.company}
               </a>
@@ -144,7 +166,7 @@ const timeline = [
   .timeline {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(var(--stops, 4), 1fr);
     gap: var(--s6);
     list-style: none;
     padding: var(--s6) 0 var(--s2);
@@ -156,7 +178,7 @@ const timeline = [
     position: absolute;
     left: 0;
     right: 0;
-    top: calc(var(--s6) + 2rem + var(--s4) + 5px);
+    top: calc(var(--s6) + 1.5rem + var(--s4) + 5px);
     height: 2px;
     background: var(--rule);
   }
@@ -166,9 +188,9 @@ const timeline = [
     align-items: flex-start;
   }
   .tl-logo {
-    height: 2rem;
+    height: 1.5rem;
     width: auto;
-    max-width: 6rem;
+    max-width: 5rem;
     object-fit: contain;
     object-position: left center;
     filter: grayscale(1) opacity(0.7);
@@ -196,6 +218,12 @@ const timeline = [
   .tl-item h3 {
     font-size: var(--text-sm);
     font-weight: 600;
+    line-height: var(--leading-normal);
+  }
+  .tl-prev {
+    margin-top: var(--s1);
+    font-size: var(--text-xs);
+    color: var(--muted);
     line-height: var(--leading-normal);
   }
   .tl-company {
