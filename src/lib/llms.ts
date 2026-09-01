@@ -13,16 +13,27 @@ export async function buildLlmsTxt(site: URL): Promise<string> {
   lines.push(`> ${p.shortBio}`);
   lines.push("");
   lines.push(
-    `${p.name} is ${p.headline.replace("Principal Engineer at AMD — on-device AI", "a Principal Engineer at AMD in Seattle focused on on-device AI: running large language models efficiently on consumer hardware")}. Key facts: maintainer of the Lemonade SDK (open-source local AI server, 5k+ GitHub stars); co-creator of TurnkeyML and GroqFlow; previously at Groq and Intel; two granted US patents; publications on AI accelerator evaluation. Expertise: ${p.knowsAbout.slice(0, 12).join(", ")}.`,
+    `${p.name} is a Principal ML Software Engineer at AMD in Seattle focused on on-device AI: running large language models efficiently on consumer hardware. Key facts: co-creator and maintainer of the Lemonade SDK (open-source local AI server, 5k+ GitHub stars); co-creator of TurnkeyML and GroqFlow; previously at Groq and Intel; two granted US patents; publications on AI accelerator evaluation. Expertise: ${p.knowsAbout.slice(0, 12).join(", ")}.`,
   );
   lines.push("");
 
   lines.push("## Profile");
   lines.push("");
   lines.push(`- [Resume (Markdown)](${abs("resume.md")}): full machine-readable resume`);
-  lines.push(`- [Home](${abs("")}): bio, experience timeline, selected projects, skills`);
+  lines.push(`- [Home](${abs("")}): bio, experience timeline, current focus, selected projects`);
   for (const s of p.socials) {
     lines.push(`- [${s.label}](${s.url}): ${s.handle}`);
+  }
+  lines.push("");
+
+  lines.push("## Current Focus");
+  lines.push("");
+  for (const f of p.focus) {
+    lines.push(
+      f.url
+        ? `- [${f.title}](${f.url}): ${f.role}. ${f.description}`
+        : `- ${f.title}: ${f.role}. ${f.description}`,
+    );
   }
   lines.push("");
 
