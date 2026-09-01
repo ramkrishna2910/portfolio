@@ -20,6 +20,14 @@ const profile = defineCollection({
       }),
     ),
     knowsAbout: z.array(z.string()),
+    focus: z.array(
+      z.object({
+        title: z.string(),
+        role: z.string(),
+        description: z.string(),
+        url: z.string().url().optional(),
+      }),
+    ),
     skillGroups: z.array(
       z.object({ label: z.string(), items: z.array(z.string()) }),
     ),

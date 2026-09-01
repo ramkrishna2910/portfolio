@@ -107,6 +107,24 @@
           "Technical talks and community building"
         ]
       }
+    ],
+    "focus": [
+      {
+        "title": "Lemonade",
+        "role": "Co-creator & maintainer",
+        "description": "Open-source local AI server — LLMs, speech, and image generation on your own hardware, with NPU and GPU acceleration.",
+        "url": "https://github.com/lemonade-sdk/lemonade"
+      },
+      {
+        "title": "Tiered intelligence",
+        "role": "Building",
+        "description": "Getting every request to the right tier of compute — NPU, GPU, or cloud — through policy-driven model routing: rule, classifier, semantic, and LLM-as-router."
+      },
+      {
+        "title": "Upstream open source",
+        "role": "Contributor",
+        "description": "Ongoing contributions across the local-AI stack: vLLM backends, llama.cpp enablement, and the ONNX ecosystem."
+      }
     ]
   }
 ]

@@ -3,7 +3,7 @@ name: TurnkeyML
 url: https://github.com/onnx/turnkeyml
 repo: onnx/turnkeyml
 role: Co-creator
-featured: true
+featured: false
 order: 2
 tagline: ONNX toolchain for evaluating and accelerating models across hardware
 tech: ["Python", "ONNX", "ONNX Runtime", "Benchmarking"]

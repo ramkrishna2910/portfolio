@@ -25,6 +25,13 @@ export async function buildResumeMarkdown(site: URL): Promise<string> {
     lines.push("");
   }
 
+  lines.push("## Current Focus");
+  lines.push("");
+  for (const f of p.focus) {
+    lines.push(`- **${f.title}** (${f.role}): ${f.description}${f.url ? ` ${f.url}` : ""}`);
+  }
+  lines.push("");
+
   lines.push("## Experience");
   lines.push("");
   for (const e of c.experience) {

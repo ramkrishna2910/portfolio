@@ -6,7 +6,6 @@ import { loadAll, fmtRange } from "../lib/content";
 
 const c = await loadAll();
 const p = c.profile;
-const featured = c.projects.filter((pr) => pr.data.featured);
 
 const logos: Record<string, string> = {
   AMD: "/logos/amd.svg",
@@ -79,6 +78,32 @@ const timeline = stops.map((s) => ({
     </div>
   </section>
 
+  <!-- Current focus -->
+  <section class="section section--wash" aria-labelledby="focus-h">
+    <div class="shell-wide">
+      <div class="section-head"><h2 id="focus-h" class="eyebrow">Current focus</h2></div>
+      <div class="work-grid">
+        {
+          p.focus.map((f) =>
+            f.url ? (
+              <a class="work-card" href={f.url} rel="noopener">
+                <p class="meta">{f.role}</p>
+                <h3>{f.title}</h3>
+                <p class="tagline">{f.description}</p>
+              </a>
+            ) : (
+              <div class="work-card work-card--static">
+                <p class="meta">{f.role}</p>
+                <h3>{f.title}</h3>
+                <p class="tagline">{f.description}</p>
+              </div>
+            ),
+          )
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- Experience -->
   <section class="section" aria-labelledby="exp-h">
     <div class="shell-wide">
@@ -105,23 +130,6 @@ const timeline = stops.map((s) => ({
     </div>
   </section>
 
-  <!-- Selected work -->
-  <section class="section section--wash" aria-labelledby="work-h">
-    <div class="shell-wide">
-      <div class="section-head"><h2 id="work-h" class="eyebrow">Selected work</h2></div>
-      <div class="work-grid">
-        {
-          featured.map((pr) => (
-            <a class="work-card" href={pr.data.url} rel="noopener">
-              <p class="meta">{pr.data.role}</p>
-              <h3>{pr.data.name}</h3>
-              <p class="tagline">{pr.data.tagline}</p>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
@@ -267,6 +275,9 @@ const timeline = stops.map((s) => ({
   }
   .work-card:hover {
     border-color: var(--accent);
+  }
+  .work-card--static:hover {
+    border-color: var(--rule);
   }
   .work-card h3 {
     font-size: var(--text-lg);
