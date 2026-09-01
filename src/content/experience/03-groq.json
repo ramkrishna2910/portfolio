@@ -1,7 +1,7 @@
 {
   "company": "Groq",
   "companyUrl": "https://groq.com",
-  "title": "Senior Machine Learning Software Engineer",
+  "title": "Senior ML Software Engineer",
   "location": "Seattle, WA",
   "start": "2021-01",
   "end": "2023-01",
@@ -11,5 +11,11 @@
     "Customer applications engineering for the Groq deterministic AI accelerator: ported and optimized customer models including graph neural networks.",
     "Presented Groq's ONNX ecosystem work and GNN acceleration results at public developer events (GroqDay)."
   ],
-  "tech": ["GroqFlow", "Groq LPU", "ONNX", "PyTorch", "Python"]
+  "tech": [
+    "GroqFlow",
+    "Groq LPU",
+    "ONNX",
+    "PyTorch",
+    "Python"
+  ]
 }

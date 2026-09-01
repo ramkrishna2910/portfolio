@@ -1,7 +1,7 @@
 {
   "company": "AMD",
   "companyUrl": "https://www.amd.com",
-  "title": "Senior Machine Learning Software Engineer",
+  "title": "Senior ML Software Engineer",
   "location": "Seattle, WA",
   "start": "2023-01",
   "end": "2025-05",
@@ -11,5 +11,11 @@
     "Contributed over 2,000 models to the ONNX Model Zoo, making it a practical benchmarking corpus for the ONNX ecosystem.",
     "Worked across ONNX Runtime execution providers and quantization flows to bring LLM inference to consumer NPUs."
   ],
-  "tech": ["TurnkeyML", "ONNX", "ONNX Runtime", "Ryzen AI", "Python"]
+  "tech": [
+    "TurnkeyML",
+    "ONNX",
+    "ONNX Runtime",
+    "Ryzen AI",
+    "Python"
+  ]
 }

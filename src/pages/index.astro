@@ -7,6 +7,12 @@ import { loadAll, fmtRange } from "../lib/content";
 const c = await loadAll();
 const p = c.profile;
 const featured = c.projects.filter((pr) => pr.data.featured);
+
+const logos: Record<string, string> = {
+  AMD: "/logos/amd.svg",
+  Groq: "/logos/groq.svg",
+  Intel: "/logos/intel.svg",
+};
 ---
 
 <BaseLayout>
@@ -37,24 +43,36 @@ const featured = c.projects.filter((pr) => pr.data.featured);
         {
           c.experience.map((e) => (
             <article class="exp-row">
-              <p class="meta">{fmtRange(e.data.start, e.data.end)}</p>
-              <h3>
-                {e.data.title} ·{" "}
-                <a href={e.data.companyUrl} rel="noopener">
-                  {e.data.company}
-                </a>
-              </h3>
+              <span class="logo-tile">
+                <img src={logos[e.data.company]} alt="" loading="lazy" width="28" height="28" />
+              </span>
+              <div>
+                <h3>
+                  {e.data.title} ·{" "}
+                  <a href={e.data.companyUrl} rel="noopener">
+                    {e.data.company}
+                  </a>
+                </h3>
+                <p class="meta">
+                  {fmtRange(e.data.start, e.data.end)} · {e.data.location}
+                </p>
+              </div>
             </article>
           ))
         }
         <article class="exp-row">
-          <p class="meta">
-            {c.education.start.slice(0, 4)} — {c.education.end.slice(0, 4)}
-          </p>
-          <h3>
-            MS, {c.education.field} ·{" "}
-            <a href={c.education.institutionUrl} rel="noopener">UNC Charlotte</a>
-          </h3>
+          <span class="logo-tile">
+            <img src="/logos/uncc.svg" alt="" loading="lazy" width="28" height="28" />
+          </span>
+          <div>
+            <h3>
+              MS, {c.education.field} ·{" "}
+              <a href={c.education.institutionUrl} rel="noopener">UNC Charlotte</a>
+            </h3>
+            <p class="meta">
+              {c.education.start.slice(0, 4)} — {c.education.end.slice(0, 4)} · Charlotte, NC
+            </p>
+          </div>
         </article>
       </div>
       <p class="more meta">
@@ -126,24 +144,39 @@ const featured = c.projects.filter((pr) => pr.data.featured);
   }
   .exp-row {
     display: grid;
-    grid-template-columns: var(--meta-col) 1fr;
-    gap: var(--s2) var(--s6);
-    align-items: baseline;
-    padding-block: var(--s3);
+    grid-template-columns: 3.25rem 1fr;
+    gap: var(--s5);
+    align-items: center;
+    padding-block: var(--s5);
     border-bottom: 1px solid var(--rule);
   }
   .exp-row:last-child {
     border-bottom: none;
   }
+  .logo-tile {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border: 1px solid var(--rule);
+    background: #fff;
+  }
+  .logo-tile img {
+    width: 1.9rem;
+    height: 1.9rem;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.65);
+    transition: filter 120ms ease;
+  }
+  .exp-row:hover .logo-tile img {
+    filter: none;
+  }
   .exp-row h3 {
-    font-size: var(--text-base);
+    font-size: var(--text-lg);
     font-weight: 600;
   }
-  @media (max-width: 40rem) {
-    .exp-row {
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
+  .exp-row .meta {
+    margin-top: var(--s1);
   }
 
   .work-grid {
