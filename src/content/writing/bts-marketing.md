@@ -6,4 +6,4 @@ date: 2023-07-11
 tags: ["Marketing", "Community building"]
 ---
 
-What the world's biggest band can teach product builders about community, distribution, and brand loyalty — a look at BTS's playbook through a marketer's lens.
+What the world's biggest band can teach product builders about community, distribution, and brand loyalty - a look at BTS's playbook through a marketer's lens.

@@ -6,4 +6,4 @@ date: 2025-04-17
 tags: ["Lemonade", "Ryzen AI", "LLM applications", "OpenAI-compatible API"]
 ---
 
-How an OpenAI-compatible local server turns the existing ecosystem of LLM applications — chat UIs, coding assistants, automation tools — into NPU-accelerated local apps on Ryzen AI, without code changes.
+How an OpenAI-compatible local server turns the existing ecosystem of LLM applications - chat UIs, coding assistants, automation tools - into NPU-accelerated local apps on Ryzen AI, without code changes.

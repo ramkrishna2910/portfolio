@@ -1,9 +1,12 @@
 {
   "title": "Design and implementation of a semi-autonomous waste segregation robot",
-  "authors": ["Ramakrishnan Sivakumar", "et al."],
+  "authors": [
+    "Ramakrishnan Sivakumar",
+    "et al."
+  ],
   "venue": "IEEE SoutheastCon",
   "year": 2016,
   "url": "https://ieeexplore.ieee.org/abstract/document/7506679",
   "type": "conference",
-  "summary": "A semi-autonomous robot that identifies and sorts recyclable waste — early work combining computer vision with embedded robotics."
+  "summary": "A semi-autonomous robot that identifies and sorts recyclable waste - early work combining computer vision with embedded robotics."
 }

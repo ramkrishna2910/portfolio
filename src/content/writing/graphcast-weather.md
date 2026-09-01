@@ -6,4 +6,4 @@ date: 2023-11-27
 tags: ["Graph neural networks", "GraphCast", "Scientific ML"]
 ---
 
-How DeepMind's GraphCast uses graph neural networks to produce 10-day global weather forecasts that outperform traditional numerical weather prediction — and what it signals about ML displacing physics-based simulation.
+How DeepMind's GraphCast uses graph neural networks to produce 10-day global weather forecasts that outperform traditional numerical weather prediction - and what it signals about ML displacing physics-based simulation.

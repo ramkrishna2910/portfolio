@@ -6,4 +6,4 @@ date: 2025-07-21
 tags: ["Lemonade", "Python", "Local AI", "Developer experience"]
 ---
 
-Why Lemonade Server is built in Python and what that unlocks: rapid engine integration, a hackable stack for the community, and no performance penalty where it matters — the inference engines underneath.
+Why Lemonade Server is built in Python and what that unlocks: rapid engine integration, a hackable stack for the community, and no performance penalty where it matters - the inference engines underneath.

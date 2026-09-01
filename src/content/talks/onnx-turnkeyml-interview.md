@@ -1,5 +1,5 @@
 ---
-title: ONNX and TurnkeyML — AMD engineer interview
+title: ONNX and TurnkeyML - AMD engineer interview
 youtubeId: iG6z5eaTD24
 event: AMD Developer Central
 date: 2024-12-19

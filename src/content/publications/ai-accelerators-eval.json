@@ -1,9 +1,14 @@
 {
   "title": "A Comprehensive Evaluation of Novel AI Accelerators for Deep Learning Workloads",
-  "authors": ["Murali Emani", "Zhen Xie", "Siddhisanket Raskar", "et al. (incl. Ramakrishnan Sivakumar)"],
+  "authors": [
+    "Murali Emani",
+    "Zhen Xie",
+    "Siddhisanket Raskar",
+    "et al. (incl. Ramakrishnan Sivakumar)"
+  ],
   "venue": "IEEE/ACM PMBS Workshop at SC22",
   "year": 2022,
   "url": "https://ieeexplore.ieee.org/abstract/document/10024028",
   "type": "workshop",
-  "summary": "Evaluates dataflow-based AI accelerators from SambaNova, Cerebras, Graphcore, and Groq against diverse workloads — deep learning primitives, benchmark models, and scientific machine learning applications — characterizing where novel architectures beat GPUs and why."
+  "summary": "Evaluates dataflow-based AI accelerators from SambaNova, Cerebras, Graphcore, and Groq against diverse workloads - deep learning primitives, benchmark models, and scientific machine learning applications - characterizing where novel architectures beat GPUs and why."
 }

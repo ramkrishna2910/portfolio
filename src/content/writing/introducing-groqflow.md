@@ -6,4 +6,4 @@ date: 2022-09-08
 tags: ["GroqFlow", "ML compilers", "Developer experience", "AI accelerators"]
 ---
 
-The launch post for GroqFlow: why compiling a model to a novel AI accelerator should be one function call, not a week of toolchain wrangling — and how GroqFlow turns PyTorch and ONNX models into Groq LPU executables automatically.
+The launch post for GroqFlow: why compiling a model to a novel AI accelerator should be one function call, not a week of toolchain wrangling - and how GroqFlow turns PyTorch and ONNX models into Groq LPU executables automatically.

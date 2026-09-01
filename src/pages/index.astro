@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import KineticGrid from "../components/KineticGrid.astro";
 import SocialLinks from "../components/SocialLinks.astro";
-import { loadAll, fmtRange } from "../lib/content";
+import { loadAll } from "../lib/content";
 
 const c = await loadAll();
 const p = c.profile;
@@ -68,7 +68,7 @@ const timeline = stops.map((s) => ({
       <p class="headline">
         Principal ML Software Engineer at
         <a href="https://www.amd.com" rel="noopener">AMD</a>. I make large language models run
-        fast on hardware people already own — as co-creator and maintainer of
+        fast on hardware people already own, as co-creator and maintainer of
         <a href="https://github.com/lemonade-sdk/lemonade" rel="noopener">Lemonade</a>, the
         open-source local AI server.
       </p>

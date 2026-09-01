@@ -43,7 +43,7 @@ export async function loadAll() {
 // Plain-text outputs (resume.md, llms.txt) avoid em dashes — they render
 // poorly in many terminals and markdown viewers. HTML pages keep them.
 export function plainDashes(s: string): string {
-  return s.replace(/\s*—\s*/g, " - ").replace(/—/g, "-");
+  return s.replace(/\s*[—–]\s*/g, " - ").replace(/[—–]/g, "-");
 }
 
 export function fmtRange(start: string, end: string | null): string {
@@ -54,5 +54,5 @@ export function fmtRange(start: string, end: string | null): string {
       year: "numeric",
     });
   };
-  return `${fmt(start)} — ${end ? fmt(end) : "Present"}`;
+  return `${fmt(start)} – ${end ? fmt(end) : "Present"}`;
 }

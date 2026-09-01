@@ -7,6 +7,6 @@ export const BASE = "/";
 
 export const SITE_TITLE = "Ramakrishnan Sivakumar";
 export const SITE_DESCRIPTION =
-  "Ramakrishnan Sivakumar — Principal Engineer at AMD working on on-device AI: running large language models efficiently on consumer hardware. Maintainer of Lemonade, the open-source local LLM SDK. Writing, talks, publications, and patents on ML systems, compilers, and AI accelerators.";
+  "Ramakrishnan Sivakumar is a Principal ML Software Engineer at AMD working on on-device AI: running large language models efficiently on consumer hardware. Co-creator and maintainer of Lemonade, the open-source local AI server. Writing, talks, publications, and patents on ML systems, compilers, and AI accelerators.";
 
 export const ANALYTICS_ID = "G-3R4GCX66NY";

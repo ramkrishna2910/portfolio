@@ -6,4 +6,4 @@ date: 2025-06-10
 tags: ["MCP", "AI agents", "Ryzen AI", "Lemonade", "Hugging Face"]
 ---
 
-Running Model Context Protocol agents entirely locally: Hugging Face Tiny Agents driven by NPU-accelerated LLMs on Ryzen AI through Lemonade Server — agentic AI without the cloud.
+Running Model Context Protocol agents entirely locally: Hugging Face Tiny Agents driven by NPU-accelerated LLMs on Ryzen AI through Lemonade Server - agentic AI without the cloud.
