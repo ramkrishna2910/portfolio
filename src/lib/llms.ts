@@ -77,6 +77,16 @@ export async function buildLlmsTxt(site: URL): Promise<string> {
   }
   lines.push("");
 
+  lines.push("## Coverage");
+  lines.push("");
+  for (const hl of c.highlights) {
+    const outlet = hl.data.note ? ` (${hl.data.note})` : "";
+    lines.push(
+      `- [${hl.data.title}](${hl.data.url})${outlet}, ${hl.data.date.getUTCFullYear()}${hl.data.excerpt ? `: ${hl.data.excerpt}` : ""}`,
+    );
+  }
+  lines.push("");
+
   lines.push("## Optional");
   lines.push("");
   lines.push(`- [Writing index](${abs("writing")}): all articles`);
