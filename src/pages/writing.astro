@@ -2,6 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { loadAll } from "../lib/content";
 import { cloud } from "../lib/writingCloud";
+import { buildCloudSvg } from "../lib/wordCloudSvg";
+
+const cloudSvg = buildCloudSvg();
 
 const c = await loadAll();
 const bodies = new Map(c.writing.map((w) => [w.id, w.body?.trim() ?? ""]));
@@ -20,12 +23,6 @@ const jsonLdExtra = c.writing.map((w) => ({
 
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" });
-
-// deterministic shuffle so big words spread through the cloud
-const shuffled = [...cloud]
-  .map((item, i) => ({ item, k: (i * 2654435761) % 4294967296 }))
-  .sort((a, b) => a.k - b.k)
-  .map(({ item }) => item);
 ---
 
 <BaseLayout
@@ -35,9 +32,10 @@ const shuffled = [...cloud]
 >
   <div class="shell-wide">
     <header class="page-head">
-      <h1>Writing</h1>
-      <ul class="cloud" aria-label="Topics from these articles, sized by how often they appear">
-        {shuffled.map((word) => <li class={`w${word.w}`}>{word.t}</li>)}
+      <h1 class="sr-only">Writing</h1>
+      <div class="cloud-hero" set:html={cloudSvg} />
+      <ul class="sr-only">
+        {cloud.map((word) => <li>{word.t}</li>)}
       </ul>
     </header>
 
@@ -74,51 +72,26 @@ const shuffled = [...cloud]
     text-transform: uppercase;
   }
 
-  /* word cloud hero: sized by real term frequency across the articles */
-  .cloud {
-    margin-top: var(--s6);
-    max-width: 52rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    column-gap: var(--s5);
-    row-gap: var(--s2);
-    list-style: none;
+  /* packed word-cloud hero: sized by real term frequency across the articles */
+  .cloud-hero {
+    max-width: 56rem;
+    margin-inline: auto;
+  }
+  .cloud-hero :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
     padding: 0;
-  }
-  .cloud li {
-    line-height: 1.1;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
     white-space: nowrap;
-  }
-  .cloud .w5 {
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 700;
-    font-variation-settings: "wdth" 116;
-    text-transform: uppercase;
-    color: var(--ink);
-  }
-  .cloud .w4 {
-    font-family: var(--font-display);
-    font-size: var(--text-xl);
-    font-weight: 600;
-    color: var(--accent-ink);
-  }
-  .cloud .w3 {
-    font-family: var(--font-body);
-    font-size: var(--text-lg);
-    color: var(--ink);
-  }
-  .cloud .w2 {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    color: var(--muted);
-  }
-  .cloud .w1 {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.05em;
-    color: var(--faint);
+    border: 0;
   }
 
   .card-grid {
