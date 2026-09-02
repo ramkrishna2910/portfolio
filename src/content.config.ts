@@ -96,6 +96,7 @@ const talks = defineCollection({
     event: z.string(),
     role: z.string().default("Speaker"),
     date: z.coerce.date(),
+    dateDisplay: z.string().optional(),
   }),
 });
 
