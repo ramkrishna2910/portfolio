@@ -43,6 +43,12 @@ const jsonLdExtra = c.talks
             </p>
             {t.data.youtubeId ? (
               <YouTubeLite id={t.data.youtubeId} title={t.data.title} />
+            ) : t.data.image && t.data.url ? (
+              <a class="talk-photo" href={t.data.url} rel="noopener">
+                <img src={t.data.image} alt={t.data.title} loading="lazy" />
+              </a>
+            ) : t.data.image ? (
+              <img class="talk-photo" src={t.data.image} alt={t.data.title} loading="lazy" />
             ) : null}
             <h2>
               {t.data.youtubeId ? (
@@ -103,5 +109,18 @@ const jsonLdExtra = c.talks
     color: var(--muted);
     font-size: var(--text-sm);
     line-height: var(--leading-normal);
+  }
+  .talk-photo {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .talk-photo img,
+  img.talk-photo {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 </style>

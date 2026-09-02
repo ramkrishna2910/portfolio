@@ -92,6 +92,7 @@ const talks = defineCollection({
     title: z.string(),
     youtubeId: z.string().optional(),
     url: z.string().url().optional(),
+    image: z.string().optional(),
     event: z.string(),
     role: z.string().default("Speaker"),
     date: z.coerce.date(),

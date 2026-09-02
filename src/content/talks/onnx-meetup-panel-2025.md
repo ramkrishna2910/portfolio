@@ -1,6 +1,7 @@
 ---
 title: "Panel: Interoperability and Standardization in AI"
 url: https://community.linuxfoundation.org/events/details/lfhq-lf-ai-data-foundation-presents-onnx-community-meet-up-1/
+image: /images/onnx-panel-2025.jpg
 event: ONNX Community Meetup 2025, Intel campus, Santa Clara
 role: Moderator
 date: 2025-06-09
