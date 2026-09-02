@@ -2,7 +2,7 @@
 // Domain cutover = change SITE_URL, add public/CNAME with the bare domain, redeploy.
 // Until the custom domain is live on GitHub Pages, the site serves from the
 // project path (BASE "/portfolio"); with the domain attached it serves at "/".
-export const SITE_URL = "https://ramkrishna.dev"; // PENDING: confirm final domain purchase
+export const SITE_URL = "https://ramkrishna.dev";
 export const BASE = "/";
 
 export const SITE_TITLE = "Ramakrishnan Sivakumar";
