@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Personal portfolio site for Ramakrishnan Sivakumar — an Astro 5 static site deployed to GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`, `withastro/action`). Optimized for both human visitors and AI agents (LLMO): the site serves `/resume.md`, `/llms.txt`, `/robots.txt`, a sitemap, and JSON-LD Person structured data, all generated from the same content source.
+Personal portfolio site for Ramakrishnan Sivakumar - an Astro 5 static site at https://ramkrishna.dev, hosted on Vercel (project `portfolio`; auto-builds `astro build` on every push to main; `vercel.json` sets cleanUrls so extensionless routes serve the .html files). The old GitHub Pages deployment now only 301-redirects github.io/portfolio links to the domain. Optimized for both human visitors and AI agents (LLMO): the site serves `/resume.md`, `/llms.txt`, `/robots.txt`, a sitemap, and JSON-LD Person structured data, all generated from the same content source.
 
 Commands: `npm run dev` (dev server), `npm run build` (build to `dist/`), `npm run preview` (serve the build at localhost:4321).
 
