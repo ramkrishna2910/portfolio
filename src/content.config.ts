@@ -83,6 +83,7 @@ const writing = defineCollection({
     venue: z.string(),
     date: z.coerce.date(),
     tags: z.array(z.string()),
+    featured: z.boolean().default(false),
   }),
 });
 

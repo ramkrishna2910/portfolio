@@ -1,9 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { loadAll } from "../lib/content";
+import { gridArt } from "../lib/gridArt";
 
 const c = await loadAll();
 const bodies = new Map(c.writing.map((w) => [w.id, w.body?.trim() ?? ""]));
+const featured = c.writing.filter((w) => w.data.featured);
+const rest = c.writing.filter((w) => !w.data.featured);
 
 const jsonLdExtra = c.writing.map((w) => ({
   "@type": "BlogPosting",
@@ -13,6 +16,9 @@ const jsonLdExtra = c.writing.map((w) => ({
   author: { "@id": `${Astro.site?.href}#person` },
   publisher: w.data.venue,
 }));
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" });
 ---
 
 <BaseLayout
@@ -28,16 +34,23 @@ const jsonLdExtra = c.writing.map((w) => ({
         ecosystems, and whatever else earns an essay.
       </p>
     </header>
+
     <div class="card-grid">
       {
-        c.writing.map((w) => (
-          <a class="card" href={w.data.url} rel="noopener">
-            <p class="meta">
-              {w.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" })}
-              &nbsp;·&nbsp;{w.data.venue}
-            </p>
-            <h2>{w.data.title}</h2>
-            <p class="summary">{bodies.get(w.id)}</p>
+        [...featured, ...rest].map((w) => (
+          <a
+            class:list={["card", { "card--featured": w.data.featured }]}
+            href={w.data.url}
+            rel="noopener"
+          >
+            <div class="card-art" set:html={gridArt(w.data.title, w.data.featured ? 880 : 640, 260)} />
+            <div class="card-body">
+              <p class="meta">
+                {fmt(w.data.date)}&nbsp;·&nbsp;{w.data.venue}
+              </p>
+              <h2>{w.data.title}</h2>
+              <p class="summary">{bodies.get(w.id)}</p>
+            </div>
           </a>
         ))
       }
@@ -60,30 +73,56 @@ const jsonLdExtra = c.writing.map((w) => ({
   }
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr));
+    grid-template-columns: repeat(6, 1fr);
     gap: var(--s4);
     padding-bottom: var(--s16);
   }
   .card {
+    grid-column: span 2;
     display: flex;
     flex-direction: column;
-    gap: var(--s3);
-    aspect-ratio: 1 / 1;
-    padding: var(--s6);
     border: 1px solid var(--rule);
     background: #fff;
     text-decoration: none;
-    transition: border-color 120ms ease, background 120ms ease;
+    transition: border-color 120ms ease;
     overflow: hidden;
+  }
+  .card--featured {
+    grid-column: span 3;
   }
   .card:hover {
     border-color: var(--accent);
-    background: var(--wash);
+  }
+  .card-art {
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg);
+    aspect-ratio: 640 / 260;
+  }
+  .card--featured .card-art {
+    aspect-ratio: 880 / 260;
+  }
+  .card-art :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+    padding: var(--s5) var(--s6) var(--s6);
   }
   .card h2 {
     font-size: var(--text-lg);
     font-weight: 600;
     line-height: var(--leading-tight);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card--featured h2 {
+    font-size: var(--text-xl);
   }
   .card:hover h2 {
     color: var(--accent-ink);
@@ -93,13 +132,20 @@ const jsonLdExtra = c.writing.map((w) => ({
     font-size: var(--text-sm);
     line-height: var(--leading-normal);
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  @media (max-width: 60rem) {
+    .card,
+    .card--featured {
+      grid-column: span 3;
+    }
+  }
   @media (max-width: 40rem) {
-    .card {
-      aspect-ratio: auto;
+    .card,
+    .card--featured {
+      grid-column: span 6;
     }
   }
 </style>
