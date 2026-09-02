@@ -1,6 +1,9 @@
 ---
 title: "Panel: Agent Infrastructure Roundtable 2026"
 url: https://luma.com/9k0g4dqj
+images:
+  - /images/agent-roundtable-2026.jpg
+  - /images/agent-roundtable-panel.jpg
 event: Aramas AI & Berkeley Gateway Accelerator, Berkeley, CA
 role: Panelist
 date: 2026-08-01
