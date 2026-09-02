@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { loadAll } from "../lib/content";
-import { gridArt } from "../lib/gridArt";
+import { cloud } from "../lib/writingCloud";
 
 const c = await loadAll();
 const bodies = new Map(c.writing.map((w) => [w.id, w.body?.trim() ?? ""]));
 const featured = c.writing.filter((w) => w.data.featured);
 const rest = c.writing.filter((w) => !w.data.featured);
+const ordered = [...featured, ...rest];
 
 const jsonLdExtra = c.writing.map((w) => ({
   "@type": "BlogPosting",
@@ -19,6 +20,12 @@ const jsonLdExtra = c.writing.map((w) => ({
 
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-US", { year: "numeric", month: "short", timeZone: "UTC" });
+
+// deterministic shuffle so big words spread through the cloud
+const shuffled = [...cloud]
+  .map((item, i) => ({ item, k: (i * 2654435761) % 4294967296 }))
+  .sort((a, b) => a.k - b.k)
+  .map(({ item }) => item);
 ---
 
 <BaseLayout
@@ -29,28 +36,27 @@ const fmt = (d: Date) =>
   <div class="shell-wide">
     <header class="page-head">
       <h1>Writing</h1>
-      <p class="lede prose">
-        Articles on ML systems: ONNX, compilers, local inference, and occasionally products,
-        ecosystems, and whatever else earns an essay.
-      </p>
+      <ul class="cloud" aria-label="Topics from these articles, sized by how often they appear">
+        {shuffled.map((word) => <li class={`w${word.w}`}>{word.t}</li>)}
+      </ul>
     </header>
 
     <div class="card-grid">
       {
-        [...featured, ...rest].map((w) => (
+        ordered.map((w, i) => (
           <a
-            class:list={["card", { "card--featured": w.data.featured }]}
+            class:list={["card", `tint-${i % 6}`, { "card--featured": w.data.featured }]}
             href={w.data.url}
             rel="noopener"
           >
-            <div class="card-art" set:html={gridArt(w.data.title, w.data.featured ? 880 : 640, 260)} />
-            <div class="card-body">
-              <p class="meta">
-                {fmt(w.data.date)}&nbsp;·&nbsp;{w.data.venue}
-              </p>
-              <h2>{w.data.title}</h2>
-              <p class="summary">{bodies.get(w.id)}</p>
-            </div>
+            <p class="meta eyebrow-line">{w.data.venue}</p>
+            <h2>{w.data.title}</h2>
+            <p class="summary">{bodies.get(w.id)}</p>
+            <p class="read-more">
+              <span>Read more</span>
+              <span aria-hidden="true">&nbsp;&#8594;</span>
+              <span class="date">{fmt(w.data.date)}</span>
+            </p>
           </a>
         ))
       }
@@ -67,65 +73,94 @@ const fmt = (d: Date) =>
     font-variation-settings: "wdth" 118;
     text-transform: uppercase;
   }
-  .lede {
-    margin-top: var(--s3);
+
+  /* word cloud hero: sized by real term frequency across the articles */
+  .cloud {
+    margin-top: var(--s6);
+    max-width: 52rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: var(--s5);
+    row-gap: var(--s2);
+    list-style: none;
+    padding: 0;
+  }
+  .cloud li {
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .cloud .w5 {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    font-variation-settings: "wdth" 116;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .cloud .w4 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--accent-ink);
+  }
+  .cloud .w3 {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    color: var(--ink);
+  }
+  .cloud .w2 {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
     color: var(--muted);
   }
+  .cloud .w1 {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.05em;
+    color: var(--faint);
+  }
+
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: var(--s4);
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;
+    gap: var(--s5);
     padding-bottom: var(--s16);
   }
   .card {
-    grid-column: span 2;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--rule);
-    background: #fff;
+    gap: var(--s3);
+    padding: var(--s6);
     text-decoration: none;
-    transition: border-color 120ms ease;
-    overflow: hidden;
+    transition: transform 120ms ease, box-shadow 120ms ease;
   }
   .card--featured {
-    grid-column: span 3;
+    grid-column: span 2;
   }
   .card:hover {
-    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(26, 28, 30, 0.08);
   }
-  .card-art {
-    border-bottom: 1px solid var(--rule);
-    background: var(--bg);
-    aspect-ratio: 640 / 260;
-  }
-  .card--featured .card-art {
-    aspect-ratio: 880 / 260;
-  }
-  .card-art :global(svg) {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s2);
-    padding: var(--s5) var(--s6) var(--s6);
+  .tint-0 { background: #fbf3d7; }
+  .tint-1 { background: #f9e9e2; }
+  .tint-2 { background: #e9f2e3; }
+  .tint-3 { background: #e7eef6; }
+  .tint-4 { background: #efeaf6; }
+  .tint-5 { background: #f3eee1; }
+
+  .eyebrow-line {
+    color: var(--accent-ink);
   }
   .card h2 {
+    font-family: var(--font-display);
     font-size: var(--text-lg);
     font-weight: 600;
     line-height: var(--leading-tight);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
   .card--featured h2 {
     font-size: var(--text-xl);
-  }
-  .card:hover h2 {
-    color: var(--accent-ink);
   }
   .summary {
     color: var(--muted);
@@ -136,16 +171,41 @@ const fmt = (d: Date) =>
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  .card--featured .summary {
+    -webkit-line-clamp: 4;
+  }
+  .read-more {
+    margin-top: auto;
+    padding-top: var(--s3);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+  }
+  .card:hover .read-more {
+    color: var(--accent-ink);
+  }
+  .read-more .date {
+    margin-left: auto;
+    color: var(--faint);
+  }
   @media (max-width: 60rem) {
-    .card,
+    .card-grid {
+      grid-template-columns: 1fr 1fr;
+    }
     .card--featured {
-      grid-column: span 3;
+      grid-column: span 2;
     }
   }
   @media (max-width: 40rem) {
-    .card,
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
     .card--featured {
-      grid-column: span 6;
+      grid-column: span 1;
     }
   }
 </style>
