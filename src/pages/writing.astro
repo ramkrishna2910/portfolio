@@ -2,9 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { loadAll } from "../lib/content";
 import { cloud } from "../lib/writingCloud";
-import { buildCloudSvg } from "../lib/wordCloudSvg";
-
-const cloudSvg = buildCloudSvg();
 
 const c = await loadAll();
 const bodies = new Map(c.writing.map((w) => [w.id, w.body?.trim() ?? ""]));
@@ -33,7 +30,14 @@ const fmt = (d: Date) =>
   <div class="shell-wide">
     <header class="page-head">
       <h1 class="sr-only">Writing</h1>
-      <div class="cloud-hero" set:html={cloudSvg} />
+      <img
+        class="cloud-hero"
+        src="/images/writing-cloud.svg"
+        alt="Word cloud of AI terminology from these articles: ONNX, open source, LLMs, local AI, Python, inference, and more"
+        width="665"
+        height="370"
+        fetchpriority="high"
+      />
       <ul class="sr-only">
         {cloud.map((word) => <li>{word.t}</li>)}
       </ul>
@@ -77,7 +81,7 @@ const fmt = (d: Date) =>
     max-width: 56rem;
     margin-inline: auto;
   }
-  .cloud-hero :global(svg) {
+  img.cloud-hero {
     display: block;
     width: 100%;
     height: auto;
