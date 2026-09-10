@@ -88,14 +88,6 @@ export async function buildResumeMarkdown(site: URL): Promise<string> {
   }
   lines.push("");
 
-  lines.push("## Publications");
-  lines.push("");
-  for (const pub of c.publications) {
-    const d = pub.data;
-    lines.push(`- [${d.title}](${d.url}) — ${d.venue}, ${d.year}`);
-  }
-  lines.push("");
-
   lines.push("## Patents");
   lines.push("");
   for (const pat of c.patents) {
@@ -103,6 +95,14 @@ export async function buildResumeMarkdown(site: URL): Promise<string> {
     lines.push(
       `- [${d.title}](${d.url}) — ${d.number} (${d.status}), ${d.assignee}, ${d.year}`,
     );
+  }
+  lines.push("");
+
+  lines.push("## Publications");
+  lines.push("");
+  for (const pub of c.publications) {
+    const d = pub.data;
+    lines.push(`- [${d.title}](${d.url}) — ${d.venue}, ${d.year}`);
   }
   lines.push("");
 

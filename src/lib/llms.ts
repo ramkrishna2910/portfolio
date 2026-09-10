@@ -67,13 +67,13 @@ export async function buildLlmsTxt(site: URL): Promise<string> {
 
   lines.push("## Research");
   lines.push("");
-  for (const pub of c.publications) {
-    lines.push(`- [${pub.data.title}](${pub.data.url}): ${pub.data.venue}, ${pub.data.year}. ${pub.data.summary}`);
-  }
   for (const pat of c.patents) {
     lines.push(
       `- [Patent: ${pat.data.title}](${pat.data.url}): ${pat.data.number} (${pat.data.status}), ${pat.data.assignee}, ${pat.data.year}.`,
     );
+  }
+  for (const pub of c.publications) {
+    lines.push(`- [${pub.data.title}](${pub.data.url}): ${pub.data.venue}, ${pub.data.year}. ${pub.data.summary}`);
   }
   lines.push("");
 

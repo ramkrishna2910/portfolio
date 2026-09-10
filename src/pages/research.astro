@@ -34,24 +34,6 @@ const jsonLdExtra = c.publications.map((pub) => ({
       </p>
     </header>
 
-    <section class="section" aria-labelledby="pubs-h">
-      <div class="section-head"><h2 id="pubs-h" class="eyebrow">Publications</h2></div>
-      <div class="ledger">
-        {
-          c.publications.map((pub) => (
-            <EntryCard
-              meta={String(pub.data.year)}
-              title={pub.data.title}
-              href={pub.data.url}
-              sub={pub.data.venue}
-            >
-              {pub.data.summary}
-            </EntryCard>
-          ))
-        }
-      </div>
-    </section>
-
     <section class="section" aria-labelledby="patents-h">
       <div class="section-head"><h2 id="patents-h" class="eyebrow">Patents</h2></div>
       <div class="ledger">
@@ -64,6 +46,24 @@ const jsonLdExtra = c.publications.map((pub) => ({
               sub={`${pat.data.assignee}, ${pat.data.year}`}
             >
               {pat.data.summary}
+            </EntryCard>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="pubs-h">
+      <div class="section-head"><h2 id="pubs-h" class="eyebrow">Publications</h2></div>
+      <div class="ledger">
+        {
+          c.publications.map((pub) => (
+            <EntryCard
+              meta={String(pub.data.year)}
+              title={pub.data.title}
+              href={pub.data.url}
+              sub={pub.data.venue}
+            >
+              {pub.data.summary}
             </EntryCard>
           ))
         }
